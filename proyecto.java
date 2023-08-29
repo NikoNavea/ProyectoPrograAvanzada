@@ -12,7 +12,7 @@ public class proyecto{
             contActividades = 0;
             listaActividades = new Actividad[20];
         }
-
+        System.out.println("Hola");
         public void agregarActividad(String nombreAct) throws IOException{
             BufferedReader lector = new BufferedReader( new InputStreamReader( System.in ) );
             
