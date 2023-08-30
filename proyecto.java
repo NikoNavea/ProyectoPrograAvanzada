@@ -18,13 +18,21 @@ public class proyecto{
             
             switch(opcion){
                 case 1:
-
+                    System.out.println("Ingrese el nombre de la actividad que desea realizar y el encargado: ");
+                    String nuevaActividad = lector.readLine();
+                    String encargado = lector.readLine();
+                    coleccion.agregarActividad(nuevaActividad, encargado);
                     break;
                 case 2:
-
+                    System.out.println("Ingrese el nombre de la actividad que desea eliminar: ");
+                    String actividadEliminar = lector.readLine();
+                    coleccion.eliminarActividad(actividadEliminar);
                     break;
                 case 3:
 
+                    break;
+                case 6:
+                    coleccion.mostrarActividades();
                     break;
                 case 0:
                     System.out.println("Gracias por usar el sistema de planificación de actividades de Extensión de la Universidad Católica de Valparaiso");
