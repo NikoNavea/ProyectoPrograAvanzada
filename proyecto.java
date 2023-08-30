@@ -10,10 +10,10 @@ public class proyecto{
         BufferedReader lector = new BufferedReader( new InputStreamReader( System.in ) );
 
         ColeccionActividades coleccion = new ColeccionActividades();
-
+        Menu menu = new Menu();
         boolean salir = true;
         while(salir){
-            System.out.println("Ingrese la opción que desea realizar: ");
+            menu.mostrarMenu();
             int opcion = Integer.parseInt(lector.readLine());
             
             switch(opcion){
@@ -29,8 +29,24 @@ public class proyecto{
                     coleccion.eliminarActividad(actividadEliminar);
                     break;
                 case 3:
+                    System.out.println("Ingrese el nombre de la actividad a la que desea inscribir al alumno: ");
+                    String nombreAct = lector.readLine();
 
+                    if(coleccion.verifActividad(nombreAct) == false){
+                        System.out.println("La actividad no existe");
+                        break; 
+                    }
+
+                    System.out.println("Ingrese el nombre, apellido y rut del alumno: ");
+                    String nombre = lector.readLine();
+                    String apellido = lector.readLine();
+                    String rut = lector.readLine();
+                
+                    Actividad actividad = coleccion.getMapaActividades().get(nombreAct);
+                    actividad.agregarAlumno(nombre, apellido, rut, nombreAct);
+                    System.out.println("El alumno ha sido inscrito en la actividad");
                     break;
+                 
                 case 6:
                     coleccion.mostrarActividades();
                     break;
