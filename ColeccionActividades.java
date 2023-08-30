@@ -45,4 +45,8 @@ public class ColeccionActividades {
         }
         return true;
     }
+
+    public HashMap<String, Actividad> getMapaActividades() {
+        return mapaActividades;
+    }
 }
