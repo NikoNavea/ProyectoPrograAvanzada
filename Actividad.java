@@ -28,4 +28,22 @@ public class Actividad {
         this.encargado = encargado;
         return encargado;
     }
+
+    public void agregarAlumno(String nombre, String apellido, String rut, String nombreAct){
+        ColeccionActividades coleccion = new ColeccionActividades();
+
+        HashMap<String, Actividad> mapaActividades = coleccion.getMapaActividades();
+        Actividad actividad = mapaActividades.get(nombreAct);
+
+        if(actividad.verifAlumno(actividad, rut) == false){
+            System.out.println("El alumno ya esta inscrito en l--a actividad");
+            return;
+        }
+
+        Alumnos nuevoAlumno = new Alumnos();
+        nuevoAlumno.setNombre(nombre);
+        nuevoAlumno.setApellido(apellido);
+        nuevoAlumno.setRut(rut);
+        listaAlumnos.add(nuevoAlumno);
+    }
 }
