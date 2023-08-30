@@ -29,6 +29,17 @@ public class Actividad {
         return encargado;
     }
 
+    public boolean verifAlumno(Actividad actividad, String rut){
+        for(int i = 0 ; i < actividad.listaAlumnos.size() ; i++){
+            if(actividad.listaAlumnos.get(i).getRut().equals(rut)){
+                System.out.println("El alumno ya esta inscrito en la actividad");
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     public void agregarAlumno(String nombre, String apellido, String rut, String nombreAct){
         ColeccionActividades coleccion = new ColeccionActividades();
 
