@@ -61,22 +61,34 @@ public class ColeccionActividades {
     }
 
     public void mostrarActividades(String nombreActividad){
+        System.out.println("");
         if(mapaActividades.get(nombreActividad) == null){
             System.out.println("La actividad no existe");
             return;
         }
         Actividad actividad = mapaActividades.get(nombreActividad);
-        System.out.println("Actividad: " + actividad.getNombreAct() + " Encargado: " + actividad.getEncargado());
+
+        System.out.println("Actividad: " + actividad.getNombreAct());
+        System.out.println("Encargado: " + actividad.getEncargado());
         System.out.println("Lista de Alumnos de la actividad " + actividad.getNombreAct());
+        System.out.println("--------------------------------------------------");
+        System.out.printf("%-20s %-20s %-15s", "Nombre", "Apellido", "RUT");
+        System.out.println("");
+        System.out.println("--------------------------------------------------");
         for(int i = 0 ; i < actividad.getListaAlumnos().size() ; i++){
-            System.out.println("Nombre: " + actividad.getListaAlumnos().get(i).getNombre() + " Apellido: " + actividad.getListaAlumnos().get(i).getApellido() + " Rut: " + actividad.getListaAlumnos().get(i).getRut());
+            System.out.printf("%-20s %-20s %-15s%n", actividad.getListaAlumnos().get(i).getNombre(), actividad.getListaAlumnos().get(i).getApellido(), actividad.getListaAlumnos().get(i).getRut());
         }
     }
 
     public void mostrarActividades(){
         System.out.println("Lista de Actividades ");
+        System.out.println("--------------------------------------------------");
+        System.out.printf("%-30s %-30s", "Actividad", "Encargado");
+        System.out.println("");
+        System.out.println("--------------------------------------------------");
         for(int i = 0 ; i < listaActividad.size() ; i++){
-            System.out.println("Actividad: " + listaActividad.get(i).getNombreAct() + " Encargado: " + listaActividad.get(i).getEncargado());
+            //System.out.println("Actividad: " + listaActividad.get(i).getNombreAct() + " Encargado: " + listaActividad.get(i).getEncargado());
+            System.out.printf("%-30s %-30s%n", listaActividad.get(i).getNombreAct(), listaActividad.get(i).getEncargado());
         }
         
     }
@@ -100,11 +112,17 @@ public class ColeccionActividades {
         }
 
         Actividad actividad = mapaActividades.get(nombreAct);
-
+        System.out.println("");
         System.out.println("Lista de Alumnos de la actividad " + actividad.getNombreAct());
+        System.out.println("--------------------------------------------------");
+        System.out.println("Nombre               Apellido             RUT");
+        System.out.println("--------------------------------------------------");
         for(int i = 0 ; i < actividad.getListaAlumnos().size() ; i++){
-            System.out.println("Nombre: " + actividad.getListaAlumnos().get(i).getNombre() + " Apellido: " + actividad.getListaAlumnos().get(i).getApellido() + " Rut: " + actividad.getListaAlumnos().get(i).getRut());
+            //System.out.println("Nombre: " + actividad.getListaAlumnos().get(i).getNombre() + " Apellido: " + actividad.getListaAlumnos().get(i).getApellido() + " Rut: " + actividad.getListaAlumnos().get(i).getRut());
+            System.out.printf("%-20s %-20s %-15s", actividad.getListaAlumnos().get(i).getNombre(),  actividad.getListaAlumnos().get(i).getApellido(), actividad.getListaAlumnos().get(i).getRut());
+            System.out.println("");
         }
+        System.out.println("--------------------------------------------------");
     }
 
     public void cambiarEncargado(String nuevoEncargado, String nombreActividad){

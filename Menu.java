@@ -18,6 +18,7 @@ public class Menu {
         System.out.println("5. Información sobre una actividad");
         System.out.println("0. Volver al menú principal");
         System.out.print("Seleccione una opción: ");
+        System.out.println("");
     }   
     
     public void mostrarMenuAlumnos(){
@@ -28,5 +29,6 @@ public class Menu {
         System.out.println("3. Mostrar alumnos");
         System.out.println("0. Volver al menú principal");
         System.out.print("Seleccione una opción: ");
+        System.out.println("");
     }
 }
