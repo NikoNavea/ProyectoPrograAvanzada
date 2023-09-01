@@ -1,13 +1,32 @@
 public class Menu {
     public void mostrarMenu(){
-        System.out.println("1. Agregar actividad a la planificación");
-        System.out.println("2. Eliminar actividad de la planificación");
-        System.out.println("3. Agregar alumno a actividad");
-        System.out.println("4. Eliminar alumno de actividad");
-        System.out.println("5. Mostrar planificación");
-        System.out.println("6. Mostrar actividades");
-        System.out.println("7. Mostrar alumnos actividad");
-        System.out.println("8. Encargados actividad");
+        System.out.println("");
+        System.out.println("Menú Principal");
+        System.out.println("----------------------------------");
+        System.out.println("1. Gestión de Actividades");
+        System.out.println("2. Gestión de Alumnos");
         System.out.println("0. Salir");
-    }    
+        System.out.print("Seleccione una opción: ");
+    }
+    public void mostrarMenuActividades(){
+        System.out.println("Menú de Gestión de Actividades");
+        System.out.println("----------------------------------");
+        System.out.println("1. Agregar actividad");
+        System.out.println("2. Eliminar actividad");
+        System.out.println("3. Mostrar actividades");
+        System.out.println("4. Cambiar el encargado de una actividad");
+        System.out.println("5. Información sobre una actividad");
+        System.out.println("0. Volver al menú principal");
+        System.out.print("Seleccione una opción: ");
+    }   
+    
+    public void mostrarMenuAlumnos(){
+        System.out.println("Menú de Gestión de Alumnos");
+        System.out.println("----------------------------------");
+        System.out.println("1. Agregar alumno");
+        System.out.println("2. Eliminar alumno de una actividad");
+        System.out.println("3. Mostrar alumnos");
+        System.out.println("0. Volver al menú principal");
+        System.out.print("Seleccione una opción: ");
+    }
 }
