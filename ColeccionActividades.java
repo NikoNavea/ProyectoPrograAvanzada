@@ -9,10 +9,10 @@ public class ColeccionActividades {
         listaActividad = new ArrayList<>();
     }
 
-    public void agregarActividad(String nombreActividad, String nombreEncargado){
-        if(mapaActividades.get(nombreActividad) == null){
-            Actividad nuevaAct = new Actividad(nombreActividad, nombreEncargado);
-            mapaActividades.put(nombreActividad, nuevaAct);
+    public void agregarActividad(Actividad actividad){
+        if(mapaActividades.get(actividad.getNombreAct()) == null){
+            Actividad nuevaAct = new Actividad(actividad.getNombreAct(), actividad.getEncargado());
+            mapaActividades.put(actividad.getNombreAct(), nuevaAct);
             listaActividad.add(nuevaAct);
         }else{
             System.out.println("La actividad ya existe");
