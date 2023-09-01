@@ -47,7 +47,6 @@ public class Actividad {
         }
 
         actividad.listaAlumnos.add(alumno);
-        System.out.println("El alumno ha sido inscrito en la actividad");
     }
 
     public Alumnos buscarAlumno(Actividad actividad, String rut){
