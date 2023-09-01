@@ -100,7 +100,7 @@ public class proyecto{
                             Actividad actividad = coleccion.getMapaActividades().get(nombreAct);
                             
                             actividad.agregarAlumno(new Alumnos(nombre, apellido, rut), actividad);
-                            
+                            System.out.println("El alumno ha sido inscrito en la actividad");
                             break;
                         case 2:
                             String opcionString;
