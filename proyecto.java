@@ -106,8 +106,18 @@ public class proyecto{
                             String opcionString;
                             String nombreAct2;
                             
-                            System.out.println("Ingrese si quiere buscar por rut o por nombre y apellido: ");
+                            System.out.println("Ingrese si quiere buscar por rut o por nombre: ");
                             opcionString = lector.readLine();
+
+
+                            do{
+                                if(opcionString.equals("rut") == false && opcionString.equals("nombre") == false){
+                                    System.out.println("Opción no válida");
+                                }
+                                System.out.println("Ingrese si quiere buscar por rut o por nombre: ");
+                                opcionString = lector.readLine();
+                            }while(opcionString.equals("rut") == false && opcionString.equals("nombre") == false);
+                            
                             System.out.println("Ingrese el nombre de la actividad de la que desea eliminar al alumno: ");
                             nombreAct2 = lector.readLine();
 
