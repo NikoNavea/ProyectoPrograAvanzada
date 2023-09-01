@@ -9,6 +9,36 @@ public class ColeccionActividades {
         listaActividad = new ArrayList<>();
     }
 
+    public void inicializarActs(){
+        Actividad actividad1 = new Actividad("Conferencia de Arte", "Ana Martínez");
+        Actividad actividad2 = new Actividad("Taller de Pintura", "Juan Perez");
+        mapaActividades.put(actividad1.getNombreAct(), actividad1);
+        mapaActividades.put(actividad2.getNombreAct(), actividad2);
+        listaActividad.add(actividad1);
+        listaActividad.add(actividad2);
+        //Agregar 10 alumnos con nombres, apellidos y ruts distintos a actividad
+        Alumnos alumno1 = new Alumnos("Juan", "Perez", "12345678-9");
+        Alumnos alumno2 = new Alumnos("Pedro", "Fernandez", "12345678-0");
+        Alumnos alumno3 = new Alumnos("Maria", "Gonzalez", "12345678-1");
+        Alumnos alumno4 = new Alumnos("Jose", "Gonzalez", "12345678-2");
+        Alumnos alumno5 = new Alumnos("Juan", "Gonzalez", "12345678-3");
+        Alumnos alumno6 = new Alumnos("Pedro", "Perez", "12345678-4");
+        Alumnos alumno7 = new Alumnos("Maria", "Perez", "12345678-5");
+        Alumnos alumno8 = new Alumnos("Jose", "Perez", "12345678-6");
+        Alumnos alumno9 = new Alumnos("Juan", "Perez", "12345678-7");
+        Alumnos alumno10 = new Alumnos("Pedro", "Gonzalez", "12345678-8");
+        actividad1.agregarAlumno(alumno1, actividad1);
+        actividad1.agregarAlumno(alumno2, actividad1);
+        actividad1.agregarAlumno(alumno3, actividad1);
+        actividad1.agregarAlumno(alumno4, actividad1);
+        actividad1.agregarAlumno(alumno5, actividad1);
+        actividad2.agregarAlumno(alumno6, actividad2);
+        actividad2.agregarAlumno(alumno7, actividad2);
+        actividad2.agregarAlumno(alumno8, actividad2);
+        actividad2.agregarAlumno(alumno9, actividad2);
+        actividad2.agregarAlumno(alumno10, actividad2);
+    }
+
     public void agregarActividad(Actividad actividad){
         if(mapaActividades.get(actividad.getNombreAct()) == null){
             Actividad nuevaAct = new Actividad(actividad.getNombreAct(), actividad.getEncargado());

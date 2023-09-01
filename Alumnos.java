@@ -3,10 +3,10 @@ public class Alumnos {
     private String apellido;
     private String rut; 
 
-    public Alumnos(){
-        nombre = null;
-        apellido = null;
-        rut = null;
+    public Alumnos(String nombre, String apellido, String rut){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.rut = rut;
     }
 
     public void setNombre(String nombre){

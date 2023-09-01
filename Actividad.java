@@ -40,21 +40,56 @@ public class Actividad {
     }
 
 
-    public void agregarAlumno(String nombre, String apellido, String rut, String nombreAct){
-        ColeccionActividades coleccion = new ColeccionActividades();
-
-        HashMap<String, Actividad> mapaActividades = coleccion.getMapaActividades();
-        Actividad actividad = mapaActividades.get(nombreAct);
-
-        if(actividad.verifAlumno(actividad, rut) == false){
-            System.out.println("El alumno ya esta inscrito en l--a actividad");
+    public void agregarAlumno(Alumnos alumno, Actividad actividad){ 
+        if(actividad.verifAlumno(actividad, alumno.getRut()) == false){
+            System.out.println("El alumno ya esta inscrito en la actividad");
             return;
         }
 
-        Alumnos nuevoAlumno = new Alumnos();
-        nuevoAlumno.setNombre(nombre);
-        nuevoAlumno.setApellido(apellido);
-        nuevoAlumno.setRut(rut);
-        listaAlumnos.add(nuevoAlumno);
+        actividad.listaAlumnos.add(alumno);
+        System.out.println("El alumno ha sido inscrito en la actividad");
+    }
+
+    public Alumnos buscarAlumno(Actividad actividad, String rut){
+        for(int i = 0 ; i < actividad.listaAlumnos.size() ; i++){
+            if(actividad.listaAlumnos.get(i).getRut().equals(rut)){
+                return actividad.listaAlumnos.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Alumnos buscarAlumno(Actividad actividad, String nombre, String apellido){
+        for(int i = 0 ; i < actividad.listaAlumnos.size() ; i++){
+            if(actividad.listaAlumnos.get(i).getNombre().equals(nombre) && actividad.listaAlumnos.get(i).getApellido().equals(apellido)){
+                return actividad.listaAlumnos.get(i);
+            }
+        }
+        return null;
+    }
+
+
+    public void eliminarAlumno(Actividad actividad, String rut){
+        if(buscarAlumno(actividad, rut) == null){
+            System.out.println("El alumno no esta inscrito en la actividad");
+            return;
+        }else{
+            actividad.listaAlumnos.remove(buscarAlumno(actividad, rut));
+            System.out.println("El alumno ha sido eliminado de la actividad");
+        }
+    }
+
+    public void eliminarAlumno(Actividad actividad, String nombre, String apellido){
+        if(buscarAlumno(actividad, nombre, apellido) == null){
+            System.out.println("El alumno no esta inscrito en la actividad");
+            return;
+        }else{
+            actividad.listaAlumnos.remove(buscarAlumno(actividad, nombre, apellido));
+            System.out.println("El alumno ha sido eliminado de la actividad");
+        }
+    }
+
+    public ArrayList<Alumnos> getListaAlumnos(){
+        return listaAlumnos;
     }
 }
