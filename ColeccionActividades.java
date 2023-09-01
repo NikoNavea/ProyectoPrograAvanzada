@@ -60,6 +60,19 @@ public class ColeccionActividades {
         }
     }
 
+    public void mostrarActividades(String nombreActividad){
+        if(mapaActividades.get(nombreActividad) == null){
+            System.out.println("La actividad no existe");
+            return;
+        }
+        Actividad actividad = mapaActividades.get(nombreActividad);
+        System.out.println("Actividad: " + actividad.getNombreAct() + " Encargado: " + actividad.getEncargado());
+        System.out.println("Lista de Alumnos de la actividad " + actividad.getNombreAct());
+        for(int i = 0 ; i < actividad.getListaAlumnos().size() ; i++){
+            System.out.println("Nombre: " + actividad.getListaAlumnos().get(i).getNombre() + " Apellido: " + actividad.getListaAlumnos().get(i).getApellido() + " Rut: " + actividad.getListaAlumnos().get(i).getRut());
+        }
+    }
+
     public void mostrarActividades(){
         System.out.println("Lista de Actividades ");
         for(int i = 0 ; i < listaActividad.size() ; i++){
@@ -79,4 +92,6 @@ public class ColeccionActividades {
     public HashMap<String, Actividad> getMapaActividades() {
         return mapaActividades;
     }
+
+    
 }
