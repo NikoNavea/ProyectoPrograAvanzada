@@ -93,5 +93,26 @@ public class ColeccionActividades {
         return mapaActividades;
     }
 
-    
+    public void mostrarAlumnosAct(String nombreAct) {
+        if(mapaActividades.get(nombreAct) == null){
+            System.out.println("La actividad no existe");
+            return;
+        }
+
+        Actividad actividad = mapaActividades.get(nombreAct);
+
+        System.out.println("Lista de Alumnos de la actividad " + actividad.getNombreAct());
+        for(int i = 0 ; i < actividad.getListaAlumnos().size() ; i++){
+            System.out.println("Nombre: " + actividad.getListaAlumnos().get(i).getNombre() + " Apellido: " + actividad.getListaAlumnos().get(i).getApellido() + " Rut: " + actividad.getListaAlumnos().get(i).getRut());
+        }
+    }
+
+    public void cambiarEncargado(String nuevoEncargado, String nombreActividad){
+        if(mapaActividades.get(nombreActividad) == null){
+            System.out.println("La actividad no existe");
+            return;
+        }
+        Actividad actividad = mapaActividades.get(nombreActividad);
+        actividad.setEncargado(nuevoEncargado);
+    }
 }
