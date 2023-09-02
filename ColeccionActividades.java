@@ -132,5 +132,6 @@ public class ColeccionActividades {
         }
         Actividad actividad = mapaActividades.get(nombreActividad);
         actividad.setEncargado(nuevoEncargado);
+        System.out.println("Encargado cambiado con éxito");
     }
 }
