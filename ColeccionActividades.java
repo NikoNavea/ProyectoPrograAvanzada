@@ -10,23 +10,36 @@ public class ColeccionActividades {
     }
 
     public void inicializarActs(){
-        Actividad actividad1 = new Actividad("Conferencia de Arte", "Ana Martínez");
-        Actividad actividad2 = new Actividad("Taller de Pintura", "Juan Perez");
+        Encargado encargado1 = new Encargado("Juan", "Perez", "12345678-9", "Director", "12345678", "juan@pucv.cl");
+        Encargado encargado2 = new Encargado("Maria", "Gonzalez", "12345678-0", "Profesor", "12345678", "Maria@pucv.cl");
+        Actividad actividad1 = new Actividad("Conferencia de Arte", "Lunes", "1-2", encargado1);
+        Actividad actividad2 = new Actividad("Taller de Pintura", "Martes", "3-4", encargado2);
         mapaActividades.put(actividad1.getNombreAct(), actividad1);
         mapaActividades.put(actividad2.getNombreAct(), actividad2);
         listaActividad.add(actividad1);
         listaActividad.add(actividad2);
-        //Agregar 10 alumnos con nombres, apellidos y ruts distintos a actividad
-        Alumnos alumno1 = new Alumnos("Juan", "Perez", "12345678-9");
-        Alumnos alumno2 = new Alumnos("Pedro", "Fernandez", "12345678-0");
-        Alumnos alumno3 = new Alumnos("Maria", "Gonzalez", "12345678-1");
-        Alumnos alumno4 = new Alumnos("Jose", "Gonzalez", "12345678-2");
-        Alumnos alumno5 = new Alumnos("Juan", "Gonzalez", "12345678-3");
-        Alumnos alumno6 = new Alumnos("Pedro", "Perez", "12345678-4");
-        Alumnos alumno7 = new Alumnos("Maria", "Perez", "12345678-5");
-        Alumnos alumno8 = new Alumnos("Jose", "Perez", "12345678-6");
-        Alumnos alumno9 = new Alumnos("Juan", "Perez", "12345678-7");
-        Alumnos alumno10 = new Alumnos("Pedro", "Gonzalez", "12345678-8");
+        Alumnos alumno1 = new Alumnos("Carlos", "Perez", "12345678-9", "Ingeniería", "2020");
+        Alumnos alumno2 = new Alumnos("Vincenzo", "Verdessi", "12345678-0", "Animacion", "2022");
+        Alumnos alumno3 = new Alumnos("Maria", "Gonzalez", "12345678-1", "Ingeniería", "2012");
+        Alumnos alumno4 = new Alumnos("Jose", "Gonzalez", "12345678-2", "Ingeniería", "2023");
+        Alumnos alumno5 = new Alumnos("Juan", "Gonzalez", "12345678-3", "Ingeniería", "2018");
+        Alumnos alumno6 = new Alumnos("Benjamin", "Carrasco", "12345678-4", "Ingeniería", "2019");
+        Alumnos alumno7 = new Alumnos("Yoryina", "Quiñones", "12345678-5", "Ingeniería", "2020");
+        Alumnos alumno8 = new Alumnos("Diego", "Álvarez", "12345678-6", "Ingeniería", "2021");
+        Alumnos alumno9 = new Alumnos("Ricardo", "Perez", "12345678-7", "Ingeniería", "2022");
+        Alumnos alumno10 = new Alumnos("Pedro", "Gonzalez", "12345678-8", "Ingeniería", "2023");
+        
+        agregarAlumnoListaMaestra(alumno1);
+        agregarAlumnoListaMaestra(alumno2);
+        agregarAlumnoListaMaestra(alumno3);
+        agregarAlumnoListaMaestra(alumno4);
+        agregarAlumnoListaMaestra(alumno5);
+        agregarAlumnoListaMaestra(alumno6);
+        agregarAlumnoListaMaestra(alumno7);
+        agregarAlumnoListaMaestra(alumno8);
+        agregarAlumnoListaMaestra(alumno9);
+        agregarAlumnoListaMaestra(alumno10);
+
         actividad1.agregarAlumno(alumno1, actividad1);
         actividad1.agregarAlumno(alumno2, actividad1);
         actividad1.agregarAlumno(alumno3, actividad1);

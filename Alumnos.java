@@ -1,35 +1,30 @@
-public class Alumnos {
-    private String nombre;
-    private String apellido;
-    private String rut; 
 
-    public Alumnos(String nombre, String apellido, String rut){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.rut = rut;
+public class Alumnos extends Persona{
+    private String carrera;
+    private String anioIngreso;
+    
+    public Alumnos(String nombre, String apellido, String rut, String carrera, String anioIngreso){
+        super(nombre, apellido, rut);
+        this.carrera = carrera;
+        this.anioIngreso = anioIngreso;
     }
 
-    public void setNombre(String nombre){
-        this.nombre = nombre;
+    public String getCarrera(){
+        return carrera;
+    }
+
+    public String setCarrera(String carrera){
+        this.carrera = carrera;
+        return carrera;
+    }
+
+    public String getAnioIngreso(){
+        return anioIngreso;
+    }
+
+    public String setAnioIngreso(String anioIngreso){
+        this.anioIngreso = anioIngreso;
+        return anioIngreso;
     }
     
-    public void setApellido(String apellido){
-        this.apellido = apellido;
-    }
-
-    public void setRut(String rut){
-        this.rut = rut;
-    }
-
-    public String getNombre(){
-        return nombre;
-    }
-
-    public String getApellido(){
-        return apellido;
-    }
-
-    public String getRut(){
-        return rut;
-    }
 }
