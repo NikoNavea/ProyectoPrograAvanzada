@@ -1,6 +1,11 @@
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ColeccionActividades {
     private HashMap <String, Actividad> mapaActividades;
@@ -246,5 +251,94 @@ public class ColeccionActividades {
             }
         }
         JOptionPane.showMessageDialog(null, "El encargado no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public Encargado buscarEncargadoPorRut(String rut){
+        if(rut == null){
+            return null;
+        }
+
+        for(int i = 0; i < listaEncargados.size(); i++){
+            if(listaEncargados.get(i).getRut().equals(rut)){
+                return listaEncargados.get(i);
+            }
+        }
+
+        JOptionPane.showMessageDialog(null, "El encargado no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+
+    public void cargarDatos() {
+        String line;
+        
+        try (BufferedReader readerEncargados = new BufferedReader(new FileReader("encargados.csv"))) {
+            while ((line = readerEncargados.readLine()) != null) {
+                String[] data = line.split(",");
+                
+                Encargado encargado = new Encargado(data[0], data[1], data[2], data[3], data[4], data[5]);
+                listaEncargados.add(encargado);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        try (BufferedReader readerActividades = new BufferedReader(new FileReader("actividades.csv"))) {
+            while ((line = readerActividades.readLine()) != null) {
+                String[] data = line.split(",");
+                
+                Encargado encargado = buscarEncargadoPorRut(data[3]);
+                
+                Actividad actividad = new Actividad(data[0], data[1], data[2], encargado);
+                listaActividad.add(actividad);
+                mapaActividades.put(actividad.getNombreAct(), actividad);
+
+                /*mostrarActividades(actividad.getNombreAct());
+                
+                if(mapaActividades.get(actividad.getNombreAct()) == null){
+                    System.out.println("No se pudo agregar la actividad " + actividad.getNombreAct() + " al mapa de actividades");
+                }
+
+                if(mapaActividades.get(actividad.getNombreAct()) != null){
+                    System.out.println("Se agregó la actividad " + actividad.getNombreAct() + " al mapa de actividades");
+                }
+
+                System.out.println("awdawd");*/
+                
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        try (BufferedReader readerAlumnos = new BufferedReader(new FileReader("alumnos.csv"))) {
+            while ((line = readerAlumnos.readLine()) != null) {
+                String[] data = line.split(",");
+                Alumnos alumno = new Alumnos(data[0], data[1], data[2], data[3], data[4]); // Assuming the constructor takes these parameters
+                listaMaestra.add(alumno);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void guardarDatos() {
+        try (BufferedWriter writerActividades = new BufferedWriter(new FileWriter("actividades.csv"));
+             BufferedWriter writerAlumnos = new BufferedWriter(new FileWriter("alumnos.csv"));
+             BufferedWriter writerEncargados = new BufferedWriter(new FileWriter("encargados.csv"))) {
+            
+            for (Actividad actividad : listaActividad) {
+                writerActividades.write(actividad.getNombreAct() + "," + actividad.getEncargado().getRut() + "," + actividad.getDia() + "," + actividad.getClaveHoraria() + "\n");
+            }
+            
+            for (Alumnos alumno : listaMaestra) {
+                writerAlumnos.write(alumno.getNombre() + "," + alumno.getApellido() + "," + alumno.getRut() + "," + alumno.getCarrera() + "," + alumno.getAnioIngreso() + "\n");
+            }
+            
+            for (Encargado encargado : listaEncargados) {
+                writerEncargados.write(encargado.getNombre() + "," + encargado.getApellido() + "," + encargado.getRut() + "," + encargado.getCargo() + "," + encargado.getTelefono() + "," + encargado.getCorreo() + "\n");
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

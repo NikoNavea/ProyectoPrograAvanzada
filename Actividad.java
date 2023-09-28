@@ -119,23 +119,19 @@ public class Actividad {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(600, 400);
 
-        // Crear un panel principal con BorderLayout
         JPanel panelPrincipal = new JPanel(new BorderLayout());
 
-        // Crear etiquetas para mostrar la información
         JLabel lblNombre = new JLabel("Actividad: " + nombreAct);
         JLabel lblEncargado = new JLabel("Encargado: " + encargado.getNombre() + " " + encargado.getApellido());
         JLabel lblDia = new JLabel("Día: " + dia);
         JLabel lblClave= new JLabel("Clave horaria: " + claveHoraria);
 
-        // Agregar las etiquetas al panel superior
         JPanel panelSuperior = new JPanel(new GridLayout(4, 1));
         panelSuperior.add(lblNombre);
         panelSuperior.add(lblEncargado);
         panelSuperior.add(lblDia);
         panelSuperior.add(lblClave);
 
-        // Crear una tabla para mostrar la lista de alumnos
         String[] columnNames = {"Nombre", "Apellido", "RUT"};
         String[][] data = new String[listaAlumnos.size()][3];
 
@@ -149,17 +145,15 @@ public class Actividad {
         JTable table = new JTable(data, columnNames);
         JScrollPane scrollPane = new JScrollPane(table);
 
-        // Agregar la tabla al centro del panel
         panelPrincipal.add(panelSuperior, BorderLayout.NORTH);
         panelPrincipal.add(scrollPane, BorderLayout.CENTER);
 
-        // Agregar el panel principal a la ventana
         frame.add(panelPrincipal);
 
-        // Hacer visible la ventana
         frame.setVisible(true);
     }
 
+    
     public boolean eliminarAlumnoListaMaestraAct(String rut){
         for(int i = 0 ; i < listaAlumnos.size() ; i++){
             if(listaAlumnos.get(i).getRut().equals(rut)){

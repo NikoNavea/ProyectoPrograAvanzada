@@ -19,6 +19,7 @@ public class Menu {
 
     public void mostrarMenuPrincipal() {
         coleccion.inicializarActs();
+        coleccion.cargarDatos();
         panelPrincipal = new JPanel(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -36,6 +37,7 @@ public class Menu {
 
         JButton btnActividades = new JButton("Gestión de Actividades");
         JButton btnAlumnos = new JButton("Gestión de Alumnos");
+        JButton btnClaves = new JButton("Información claves horarias");
         JButton btnSalir = new JButton("Salir");
 
         btnActividades.addActionListener(new ActionListener() {
@@ -50,8 +52,15 @@ public class Menu {
             }
         });
 
+        btnClaves.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarClavesHorarias();
+            }
+        });
+
         btnSalir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                coleccion.guardarDatos();
                 System.exit(0);
             }
         });
@@ -62,6 +71,9 @@ public class Menu {
 
         gbc.gridy++;
         panelPrincipal.add(btnAlumnos, gbc);
+
+        gbc.gridy++;
+        panelPrincipal.add(btnClaves, gbc);
 
         gbc.gridy++;
         panelPrincipal.add(btnSalir,gbc);
@@ -278,12 +290,6 @@ public class Menu {
 
         //Accion de volver al menu principal
         btnVolver.addActionListener(new ActionListener() {
-         
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-
-        btnVolver.addActionListener(new ActionListener() {
         
             public void actionPerformed(ActionEvent e) {
                 frame.remove(panelActividades);
@@ -447,5 +453,28 @@ public class Menu {
         frame.add(panelActividades);
         frame.revalidate();
         frame.repaint();
+    }
+
+    public void mostrarClavesHorarias(){
+        String[] columnNames = {"Clave Horaria", "Inicio", "Fin"};
+    
+        Object[][] data = {
+            {"1-2", "8:15", "9:25"},
+            {"3-4", "9:35", "10:45"},
+            {"5-6", "11:00", "12:10"},
+            {"7-8", "12:20", "13:30"},
+            {"ALMUERZO", "", ""},
+            {"9-10", "14:30", "15:40"},
+            {"11-12", "15:50", "17:00"},
+            {"13-14", "17:10", "18:20"}
+        };
+    
+        JTable table = new JTable(data, columnNames);
+        table.setPreferredScrollableViewportSize(new Dimension(250, 100));
+        table.setFillsViewportHeight(true);
+    
+        JScrollPane scrollPane = new JScrollPane(table);
+    
+        JOptionPane.showMessageDialog(null, scrollPane, "Información de Claves Horarias", JOptionPane.INFORMATION_MESSAGE);
     }
 }
