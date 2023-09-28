@@ -1,13 +1,19 @@
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 public class Actividad {
-    private String encargado;
+    private Encargado encargado;
     private String nombreAct;
     private ArrayList <Alumnos> listaAlumnos;
+    private String claveHoraria;
+    private String dia;
     
-    public Actividad(String nombreAct, String encargado){
+    public Actividad(String nombreAct, String dia, String claveHoraria, Encargado encargado){
         this.encargado = encargado;
         this.nombreAct = nombreAct;
+        this.dia = dia;
+        this.claveHoraria = claveHoraria;
         this.listaAlumnos = new ArrayList<>();
     }
 
@@ -20,19 +26,36 @@ public class Actividad {
         return nombreAct;
     }
     
-    public String getEncargado(){
+    public String getDia(){
+        return dia;
+    }
+
+    public String setDia(String dia){
+        this.dia = dia;
+        return dia;
+    }
+
+    public String getClaveHoraria(){
+        return claveHoraria;
+    }
+
+    public String setClaveHoraria(String claveHoraria){
+        this.claveHoraria = claveHoraria;
+        return claveHoraria;
+    }
+
+    public Encargado getEncargado(){
         return encargado;
     }
-    
-    public String setEncargado(String encargado){
+
+    public void setEncargado(Encargado encargado){
         this.encargado = encargado;
-        return encargado;
     }
 
     public boolean verifAlumno(Actividad actividad, String rut){
         for(int i = 0 ; i < actividad.listaAlumnos.size() ; i++){
             if(actividad.listaAlumnos.get(i).getRut().equals(rut)){
-                System.out.println("El alumno ya esta inscrito en la actividad");
+                JOptionPane.showMessageDialog(null, "El alumno ya está inscrito en la actividad.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
@@ -40,13 +63,13 @@ public class Actividad {
     }
 
 
-    public void agregarAlumno(Alumnos alumno, Actividad actividad){ 
+    public boolean agregarAlumno(Alumnos alumno, Actividad actividad){ 
         if(actividad.verifAlumno(actividad, alumno.getRut()) == false){
-            System.out.println("El alumno ya esta inscrito en la actividad");
-            return;
+            return false;
         }
 
         actividad.listaAlumnos.add(alumno);
+        return true;
     }
 
     public Alumnos buscarAlumno(Actividad actividad, String rut){
@@ -68,27 +91,26 @@ public class Actividad {
     }
 
 
-    public void eliminarAlumno(Actividad actividad, String rut){
+    public boolean eliminarAlumno(Actividad actividad, String rut){
         if(buscarAlumno(actividad, rut) == null){
-            System.out.println("El alumno no esta inscrito en la actividad");
-            return;
-        }else{
-            actividad.listaAlumnos.remove(buscarAlumno(actividad, rut));
-            System.out.println("El alumno ha sido eliminado de la actividad");
+            JOptionPane.showMessageDialog(null, "El alumno no está inscrito en esta la actividad.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
+        
+        actividad.listaAlumnos.remove(buscarAlumno(actividad, rut));
+        JOptionPane.showMessageDialog(null, "El alumno ha sido eliminado de la actividad con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        return true;
+        
     }
 
-    public void eliminarAlumno(Actividad actividad, String nombre, String apellido){
+    public boolean eliminarAlumno(Actividad actividad, String nombre, String apellido){
         if(buscarAlumno(actividad, nombre, apellido) == null){
-            System.out.println("El alumno no esta inscrito en la actividad");
-            return;
+            JOptionPane.showMessageDialog(null, "El alumno no está inscrito en esta la actividad.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }else{
             actividad.listaAlumnos.remove(buscarAlumno(actividad, nombre, apellido));
-            System.out.println("El alumno ha sido eliminado de la actividad");
+            JOptionPane.showMessageDialog(null, "El alumno ha sido eliminado de la actividad con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         }
-    }
-
-    public ArrayList<Alumnos> getListaAlumnos(){
-        return listaAlumnos;
     }
 }

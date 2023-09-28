@@ -3,10 +3,15 @@ import java.util.*;
 public class ColeccionActividades {
     private HashMap <String, Actividad> mapaActividades;
     private ArrayList <Actividad> listaActividad;
+    private ArrayList <Alumnos> listaMaestra;
+    private ArrayList <Encargado> listaEncargados;
+    
 
     public ColeccionActividades(){
         mapaActividades = new HashMap<>();
         listaActividad = new ArrayList<>();
+        listaMaestra = new ArrayList<>();
+        listaEncargados = new ArrayList<>();
     }
 
     public void inicializarActs(){
