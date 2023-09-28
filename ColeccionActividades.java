@@ -221,4 +221,30 @@ public class ColeccionActividades {
         actividad.setEncargado(nuevoEncargado);
         JOptionPane.showMessageDialog(null, "Encargado cambiado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     } 
+
+    public void mostrarInfoAlumno(String rut){
+        if(rut == null){
+            return;
+        }
+        for(int i = 0; i < listaMaestra.size(); i++){
+            if(listaMaestra.get(i).getRut().equals(rut)){
+                listaMaestra.get(i).mostrarInfo();
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "El alumno no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void mostrarInfoEncargado(String rut){
+        if(rut == null){
+            return;
+        }
+        for(int i = 0; i < listaActividad.size(); i++){
+            if(listaActividad.get(i).getEncargado().getRut().equals(rut)){
+                listaActividad.get(i).getEncargado().mostrarInfo();
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "El encargado no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }

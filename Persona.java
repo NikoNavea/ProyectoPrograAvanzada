@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 
 public class Persona {
     private String nombre;
@@ -34,5 +36,17 @@ public class Persona {
         return rut;
     }
     
+    public JPanel mostrarInfo(){
+        JPanel panel = new JPanel(new GridLayout(3, 1));
     
+        JLabel lblNombre = new JLabel("Nombre: " + nombre);
+        JLabel lblApellido = new JLabel("Apellido: " + apellido);
+        JLabel lblRut = new JLabel("RUT: " + rut);
+    
+        panel.add(lblNombre);
+        panel.add(lblApellido);
+        panel.add(lblRut);
+    
+        return panel;
+    }
 }
