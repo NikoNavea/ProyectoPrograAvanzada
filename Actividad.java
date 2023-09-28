@@ -123,14 +123,17 @@ public class Actividad {
 
         JLabel lblNombre = new JLabel("Actividad: " + nombreAct);
         JLabel lblEncargado = new JLabel("Encargado: " + encargado.getNombre() + " " + encargado.getApellido());
+        JLabel lblRutEncargado = new JLabel("RUT: " + encargado.getRut());
         JLabel lblDia = new JLabel("Día: " + dia);
         JLabel lblClave= new JLabel("Clave horaria: " + claveHoraria);
 
         JPanel panelSuperior = new JPanel(new GridLayout(4, 1));
         panelSuperior.add(lblNombre);
-        panelSuperior.add(lblEncargado);
         panelSuperior.add(lblDia);
         panelSuperior.add(lblClave);
+        panelSuperior.add(lblEncargado);
+        panelSuperior.add(lblRutEncargado);
+        
 
         String[] columnNames = {"Nombre", "Apellido", "RUT"};
         String[][] data = new String[listaAlumnos.size()][3];

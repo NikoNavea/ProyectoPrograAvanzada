@@ -105,94 +105,66 @@ public class Menu {
         //Llamado a metodo agregarActividad
         btnAgregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JPanel panelDatosActividad = new JPanel();
-                panelDatosActividad.setLayout(new BoxLayout(panelDatosActividad, BoxLayout.Y_AXIS));
+                JPanel panelAgregarAlumno = new JPanel();
+                panelAgregarAlumno.setLayout(new BoxLayout(panelAgregarAlumno, BoxLayout.Y_AXIS));
 
-                JTextField nombreField = new JTextField(20);
-                JTextField claveHorariaField = new JTextField(20);
-                JTextField diaField = new JTextField(20);
+                JTextField actividadField = new JTextField(20);
+                JTextField nombreAlumnoField = new JTextField(20);
+                JTextField apellidoAlumnoField = new JTextField(20);
+                JTextField rutAlumnoField = new JTextField(20);
+                JTextField carreraField = new JTextField(20);
+                JTextField anioField = new JTextField(20);
+                
+                panelAgregarAlumno.add(new JLabel("Nombre de la actividad:"));
+                panelAgregarAlumno.add(actividadField);
 
-                panelDatosActividad.add(new JLabel("Nombre de la actividad:"));
-                panelDatosActividad.add(nombreField);
+                panelAgregarAlumno.add(new JLabel("Nombre del alumno:"));
+                panelAgregarAlumno.add(nombreAlumnoField);
 
-                panelDatosActividad.add(new JLabel("Clave Horaria:"));
-                panelDatosActividad.add(claveHorariaField);
+                panelAgregarAlumno.add(new JLabel("Apellido del alumno:"));
+                panelAgregarAlumno.add(apellidoAlumnoField);
 
-                panelDatosActividad.add(new JLabel("Día:"));
-                panelDatosActividad.add(diaField);
+                panelAgregarAlumno.add(new JLabel("Rut del alumno:"));
+                panelAgregarAlumno.add(rutAlumnoField);
+
+                panelAgregarAlumno.add(new JLabel("Carrera del alumno:"));
+                panelAgregarAlumno.add(carreraField);
+
+                panelAgregarAlumno.add(new JLabel("Año de ingreso del alumno:"));
+                panelAgregarAlumno.add(anioField);
 
                 int option = JOptionPane.showOptionDialog(
-                        null,
-                        panelDatosActividad,
-                        "Ingrese los siguientes datos de la actividad:",
-                        JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        new Object[]{"OK", "Cancel"},
-                        "OK"
+                    null,
+                    panelAgregarAlumno,
+                    "Ingrese los siguientes datos del alumno:",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    new Object[]{"Agregar", "Cancelar"},
+                    "Agregar"
                 );
 
-
-                // Verificar si el usuario hizo clic en OK
                 if (option == JOptionPane.OK_OPTION) {
+                    String nombreAct = actividadField.getText();
 
-                    JPanel panelDatosEncargado = new JPanel();
+                    if(coleccion.verifActividad(nombreAct) == false){
+                        return; 
+                    }	
+                    String nombreAlumno = nombreAlumnoField.getText();
+                    String apellidoAlumno = apellidoAlumnoField.getText();
+                    String rutAlumno = rutAlumnoField.getText();
+                    String carreraAlumno = carreraField.getText();
+                    String anioAlumno = anioField.getText();
+
+                    Actividad actividad = coleccion.getMapaActividades().get(nombreAct);
+                    Alumnos alumno = new Alumnos(nombreAlumno, apellidoAlumno, rutAlumno, carreraAlumno, anioAlumno);
                     
-                    panelDatosEncargado.setLayout(new BoxLayout(panelDatosEncargado, BoxLayout.Y_AXIS));
-
-                    JTextField nombreEField = new JTextField(20);
-                    JTextField apellidoEField = new JTextField(20);
-                    JTextField rutEField = new JTextField(20);
-                    JTextField cargoEField = new JTextField(20);
-                    JTextField telefonoEField = new JTextField(20);
-                    JTextField correoEField = new JTextField(20);
-
-                    panelDatosEncargado.add(new JLabel("Nombre del encargado:"));
-                    panelDatosEncargado.add(nombreEField);
-                    
-                    panelDatosEncargado.add(new JLabel("Apellido del encargado:"));
-                    panelDatosEncargado.add(apellidoEField);
-
-                    panelDatosEncargado.add(new JLabel("Rut del encargado:"));
-                    panelDatosEncargado.add(rutEField);
-
-                    panelDatosEncargado.add(new JLabel("Cargo del encargado:"));
-                    panelDatosEncargado.add(cargoEField);
-    
-                    panelDatosEncargado.add(new JLabel("Telefono del encargado:"));
-                    panelDatosEncargado.add(telefonoEField);
-
-                    panelDatosEncargado.add(new JLabel("Correo del encargado:"));
-                    panelDatosEncargado.add(correoEField);
-                    
-                    int option2 = JOptionPane.showOptionDialog(
-                        null,
-                        panelDatosEncargado,
-                        "Ingrese los siguientes datos del encargado:",
-                        JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        new Object[]{"OK", "Cancel"},
-                        "OK"
-                    );
-
-                    if(option2 == JOptionPane.OK_OPTION){
-                        String nombre = nombreEField.getText();
-                        String apellido = apellidoEField.getText();
-                        String rut = rutEField.getText();
-                        String cargo = cargoEField.getText();
-                        String telefono = telefonoEField.getText();
-                        String correo = correoEField.getText();
-
-                        Encargado encargado = new Encargado(nombre, apellido, rut, cargo, telefono, correo);
-
-                        String nombreAct = nombreField.getText();
-                        String claveHoraria = claveHorariaField.getText();
-                        String dia = diaField.getText();
-
-                        coleccion.agregarActividad(new Actividad(nombreAct,dia, claveHoraria, encargado));
+                    if(actividad.agregarAlumno(alumno, actividad)){
+                        coleccion.agregarAlumnoListaMaestra(alumno);
                     }
                 }
+
+                JOptionPane.showMessageDialog(null, "Acción realizada con éxito");
             }
         });
 

@@ -286,24 +286,12 @@ public class ColeccionActividades {
             while ((line = readerActividades.readLine()) != null) {
                 String[] data = line.split(",");
                 
-                Encargado encargado = buscarEncargadoPorRut(data[3]);
+                Encargado encargado = buscarEncargadoPorRut(data[1]);
                 
-                Actividad actividad = new Actividad(data[0], data[1], data[2], encargado);
+                Actividad actividad = new Actividad(data[0], data[2], data[3], encargado);
                 listaActividad.add(actividad);
                 mapaActividades.put(actividad.getNombreAct(), actividad);
 
-                /*mostrarActividades(actividad.getNombreAct());
-                
-                if(mapaActividades.get(actividad.getNombreAct()) == null){
-                    System.out.println("No se pudo agregar la actividad " + actividad.getNombreAct() + " al mapa de actividades");
-                }
-
-                if(mapaActividades.get(actividad.getNombreAct()) != null){
-                    System.out.println("Se agregó la actividad " + actividad.getNombreAct() + " al mapa de actividades");
-                }
-
-                System.out.println("awdawd");*/
-                
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -312,7 +300,7 @@ public class ColeccionActividades {
         try (BufferedReader readerAlumnos = new BufferedReader(new FileReader("alumnos.csv"))) {
             while ((line = readerAlumnos.readLine()) != null) {
                 String[] data = line.split(",");
-                Alumnos alumno = new Alumnos(data[0], data[1], data[2], data[3], data[4]); // Assuming the constructor takes these parameters
+                Alumnos alumno = new Alumnos(data[0], data[1], data[2], data[3], data[4]); 
                 listaMaestra.add(alumno);
             }
         } catch (IOException e) {
@@ -320,23 +308,55 @@ public class ColeccionActividades {
         }
     }
 
+
     public void guardarDatos() {
-        try (BufferedWriter writerActividades = new BufferedWriter(new FileWriter("actividades.csv"));
-             BufferedWriter writerAlumnos = new BufferedWriter(new FileWriter("alumnos.csv"));
-             BufferedWriter writerEncargados = new BufferedWriter(new FileWriter("encargados.csv"))) {
-            
+        // Guardar actividades
+        try (BufferedWriter writerActividades = new BufferedWriter(new FileWriter("actividades.csv"))) {
             for (Actividad actividad : listaActividad) {
-                writerActividades.write(actividad.getNombreAct() + "," + actividad.getEncargado().getRut() + "," + actividad.getDia() + "," + actividad.getClaveHoraria() + "\n");
+                if (actividad != null && actividad.getNombreAct() != null && actividad.getEncargado() != null) {
+                    writerActividades.write(actividad.getNombreAct() + "," +
+                                            actividad.getEncargado().getRut() + "," +
+                                            actividad.getDia() + "," +
+                                            actividad.getClaveHoraria() + "\n");
+                } else {
+                    System.out.println("Actividad inválida o con datos incompletos. No se guardó: " + actividad);
+                }
             }
-            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Guardar alumnos
+        try (BufferedWriter writerAlumnos = new BufferedWriter(new FileWriter("alumnos.csv"))) {
             for (Alumnos alumno : listaMaestra) {
-                writerAlumnos.write(alumno.getNombre() + "," + alumno.getApellido() + "," + alumno.getRut() + "," + alumno.getCarrera() + "," + alumno.getAnioIngreso() + "\n");
+                if (alumno != null && alumno.getNombre() != null && alumno.getApellido() != null && alumno.getRut() != null) {
+                    writerAlumnos.write(alumno.getNombre() + "," +
+                                        alumno.getApellido() + "," +
+                                        alumno.getRut() + "," +
+                                        alumno.getCarrera() + "," +
+                                        alumno.getAnioIngreso() + "\n");
+                } else {
+                    System.out.println("Alumno inválido o con datos incompletos. No se guardó: " + alumno);
+                }
             }
-            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Guardar encargados
+        try (BufferedWriter writerEncargados = new BufferedWriter(new FileWriter("encargados.csv"))) {
             for (Encargado encargado : listaEncargados) {
-                writerEncargados.write(encargado.getNombre() + "," + encargado.getApellido() + "," + encargado.getRut() + "," + encargado.getCargo() + "," + encargado.getTelefono() + "," + encargado.getCorreo() + "\n");
+                if (encargado != null && encargado.getNombre() != null && encargado.getApellido() != null && encargado.getRut() != null) {
+                    writerEncargados.write(encargado.getNombre() + "," +
+                                        encargado.getApellido() + "," +
+                                        encargado.getRut() + "," +
+                                        encargado.getCargo() + "," +
+                                        encargado.getTelefono() + "," +
+                                        encargado.getCorreo() + "\n");
+                } else {
+                    System.out.println("Encargado inválido o con datos incompletos. No se guardó: " + encargado);
+                }
             }
-            
         } catch (IOException e) {
             e.printStackTrace();
         }
