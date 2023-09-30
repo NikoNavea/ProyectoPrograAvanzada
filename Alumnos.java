@@ -1,14 +1,15 @@
-import javax.swing.*;
-import java.awt.*;
+package models;
 
 public class Alumnos extends Persona{
     private String carrera;
     private String anioIngreso;
+    private String actividad; 
     
     public Alumnos(String nombre, String apellido, String rut, String carrera, String anioIngreso){
         super(nombre, apellido, rut);
         this.carrera = carrera;
         this.anioIngreso = anioIngreso;
+        this.actividad = null;
     }
 
     public String getCarrera(){
@@ -29,22 +30,12 @@ public class Alumnos extends Persona{
         return anioIngreso;
     }
     
-    public JPanel mostrarInfo() {
-        JPanel panel = super.mostrarInfo();
-
-        JLabel lblCarrera = new JLabel("Carrera: " + carrera);
-        JLabel lblAnioIngreso = new JLabel("Año de Ingreso: " + anioIngreso);
-
-        panel.setLayout(new GridLayout(5, 1));
-        panel.add(lblCarrera);
-        panel.add(lblAnioIngreso);
-
-        JFrame frame = new JFrame("Información del Alumno");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(300, 250);
-        frame.add(panel);
-        frame.setVisible(true);
-
-        return panel;
+    public String getActividad(){
+        return actividad;
     }
+
+    public void setActividad(String actividad){
+        this.actividad = actividad;
+    }
+
 }

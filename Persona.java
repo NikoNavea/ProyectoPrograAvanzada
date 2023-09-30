@@ -1,5 +1,4 @@
-import javax.swing.*;
-import java.awt.*;
+package models;
 
 public class Persona {
     private String nombre;
@@ -34,19 +33,5 @@ public class Persona {
 
     public String getRut(){
         return rut;
-    }
-    
-    public JPanel mostrarInfo(){
-        JPanel panel = new JPanel(new GridLayout(3, 1));
-    
-        JLabel lblNombre = new JLabel("Nombre: " + nombre);
-        JLabel lblApellido = new JLabel("Apellido: " + apellido);
-        JLabel lblRut = new JLabel("RUT: " + rut);
-    
-        panel.add(lblNombre);
-        panel.add(lblApellido);
-        panel.add(lblRut);
-    
-        return panel;
     }
 }

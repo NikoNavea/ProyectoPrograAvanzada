@@ -1,6 +1,7 @@
+package models;
+
 import java.util.*;
 import javax.swing.*;
-import java.awt.*;
 
 public class Actividad {
     private Encargado encargado;
@@ -52,6 +53,7 @@ public class Actividad {
         this.encargado = encargado;
     }
 
+
     public boolean verifAlumno(Actividad actividad, String rut){
         for(int i = 0 ; i < actividad.listaAlumnos.size() ; i++){
             if(actividad.listaAlumnos.get(i).getRut().equals(rut)){
@@ -64,10 +66,16 @@ public class Actividad {
 
 
     public boolean agregarAlumno(Alumnos alumno, Actividad actividad){ 
-        if(actividad.verifAlumno(actividad, alumno.getRut()) == false){
+        if(!actividad.verifAlumno(actividad, alumno.getRut())){
             return false;
         }
 
+        if(alumno.getActividad() != null){
+            JOptionPane.showMessageDialog(null, "El alumno ya está inscrito en otra actividad.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        alumno.setActividad(actividad.getNombreAct());
         actividad.listaAlumnos.add(alumno);
         return true;
     }
@@ -90,6 +98,19 @@ public class Actividad {
         return null;
     }
 
+    public Alumnos recorrerListaAlumnos(Actividad actividad, int i){
+        if(actividad == null || actividad.listaAlumnos.isEmpty()){
+            return null;
+        }
+        return actividad.listaAlumnos.get(i);
+    }
+
+    public int cantidadAlumnos(Actividad actividad){
+        if(actividad == null || actividad.listaAlumnos.isEmpty()){
+            return 0;
+        }
+        return actividad.listaAlumnos.size();
+    }
 
     public boolean eliminarAlumno(Actividad actividad, String rut){
         if(buscarAlumno(actividad, rut) == null){
@@ -114,49 +135,16 @@ public class Actividad {
         }
     }
 
-    public void mostrarDetallesActividad() {
-        JFrame frame = new JFrame("Detalles de la Actividad");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 400);
-
-        JPanel panelPrincipal = new JPanel(new BorderLayout());
-
-        JLabel lblNombre = new JLabel("Actividad: " + nombreAct);
-        JLabel lblEncargado = new JLabel("Encargado: " + encargado.getNombre() + " " + encargado.getApellido());
-        JLabel lblRutEncargado = new JLabel("RUT: " + encargado.getRut());
-        JLabel lblDia = new JLabel("Día: " + dia);
-        JLabel lblClave= new JLabel("Clave horaria: " + claveHoraria);
-
-        JPanel panelSuperior = new JPanel(new GridLayout(4, 1));
-        panelSuperior.add(lblNombre);
-        panelSuperior.add(lblDia);
-        panelSuperior.add(lblClave);
-        panelSuperior.add(lblEncargado);
-        panelSuperior.add(lblRutEncargado);
-        
-
-        String[] columnNames = {"Nombre", "Apellido", "RUT"};
-        String[][] data = new String[listaAlumnos.size()][3];
-
+    public ArrayList<Alumnos> filtrarAlumnosCarrera(String carrera) {
+        ArrayList<Alumnos> lista = new ArrayList<>();
         for (int i = 0; i < listaAlumnos.size(); i++) {
-            Alumnos alumno = listaAlumnos.get(i);
-            data[i][0] = alumno.getNombre();
-            data[i][1] = alumno.getApellido();
-            data[i][2] = alumno.getRut();
+            if (listaAlumnos.get(i).getCarrera().equals(carrera)) {
+                lista.add(listaAlumnos.get(i));
+            }
         }
-
-        JTable table = new JTable(data, columnNames);
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        panelPrincipal.add(panelSuperior, BorderLayout.NORTH);
-        panelPrincipal.add(scrollPane, BorderLayout.CENTER);
-
-        frame.add(panelPrincipal);
-
-        frame.setVisible(true);
+        return lista;
     }
 
-    
     public boolean eliminarAlumnoListaMaestraAct(String rut){
         for(int i = 0 ; i < listaAlumnos.size() ; i++){
             if(listaAlumnos.get(i).getRut().equals(rut)){
