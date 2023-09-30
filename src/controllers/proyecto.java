@@ -1,6 +1,8 @@
+package controllers;
+import views.Menu;
+
 import java.io.*;
 import javax.swing.*;
-
 //Planificación de las actividades del área de Extensión de una Universidad
 
 public class proyecto{
