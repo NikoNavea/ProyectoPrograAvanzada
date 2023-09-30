@@ -1,6 +1,10 @@
+package controllers;
+import models.*;
+import views.*;
+
+
 import java.util.*;
 import javax.swing.*;
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -21,53 +25,11 @@ public class ColeccionActividades {
         listaEncargados = new ArrayList<>();
     }
 
-    public void inicializarActs(){
-        Encargado encargado1 = new Encargado("Juan", "Perez", "12345678-9", "Director", "12345678", "juan@pucv.cl");
-        Encargado encargado2 = new Encargado("Maria", "Gonzalez", "12345678-0", "Profesor", "12345678", "Maria@pucv.cl");
-        Actividad actividad1 = new Actividad("Conferencia de Arte", "Lunes", "1-2", encargado1);
-        Actividad actividad2 = new Actividad("Taller de Pintura", "Martes", "3-4", encargado2);
-        mapaActividades.put(actividad1.getNombreAct(), actividad1);
-        mapaActividades.put(actividad2.getNombreAct(), actividad2);
-        listaActividad.add(actividad1);
-        listaActividad.add(actividad2);
-        Alumnos alumno1 = new Alumnos("Carlos", "Perez", "12345678-9", "Ingeniería", "2020");
-        Alumnos alumno2 = new Alumnos("Vincenzo", "Verdessi", "12345678-0", "Animacion", "2022");
-        Alumnos alumno3 = new Alumnos("Maria", "Gonzalez", "12345678-1", "Ingeniería", "2012");
-        Alumnos alumno4 = new Alumnos("Jose", "Gonzalez", "12345678-2", "Ingeniería", "2023");
-        Alumnos alumno5 = new Alumnos("Juan", "Gonzalez", "12345678-3", "Ingeniería", "2018");
-        Alumnos alumno6 = new Alumnos("Benjamin", "Carrasco", "12345678-4", "Ingeniería", "2019");
-        Alumnos alumno7 = new Alumnos("Yoryina", "Quiñones", "12345678-5", "Ingeniería", "2020");
-        Alumnos alumno8 = new Alumnos("Diego", "Álvarez", "12345678-6", "Ingeniería", "2021");
-        Alumnos alumno9 = new Alumnos("Ricardo", "Perez", "12345678-7", "Ingeniería", "2022");
-        Alumnos alumno10 = new Alumnos("Pedro", "Gonzalez", "12345678-8", "Ingeniería", "2023");
-        
-        agregarAlumnoListaMaestra(alumno1);
-        agregarAlumnoListaMaestra(alumno2);
-        agregarAlumnoListaMaestra(alumno3);
-        agregarAlumnoListaMaestra(alumno4);
-        agregarAlumnoListaMaestra(alumno5);
-        agregarAlumnoListaMaestra(alumno6);
-        agregarAlumnoListaMaestra(alumno7);
-        agregarAlumnoListaMaestra(alumno8);
-        agregarAlumnoListaMaestra(alumno9);
-        agregarAlumnoListaMaestra(alumno10);
-
-        actividad1.agregarAlumno(alumno1, actividad1);
-        actividad1.agregarAlumno(alumno2, actividad1);
-        actividad1.agregarAlumno(alumno3, actividad1);
-        actividad1.agregarAlumno(alumno4, actividad1);
-        actividad1.agregarAlumno(alumno5, actividad1);
-        actividad2.agregarAlumno(alumno6, actividad2);
-        actividad2.agregarAlumno(alumno7, actividad2);
-        actividad2.agregarAlumno(alumno8, actividad2);
-        actividad2.agregarAlumno(alumno9, actividad2);
-        actividad2.agregarAlumno(alumno10, actividad2);
-    }
-
-    public void agregarActividad(Actividad actividad){
+    public void agregarActividad(Actividad actividad, Encargado encargado){
         if(mapaActividades.get(actividad.getNombreAct()) == null){
             mapaActividades.put(actividad.getNombreAct(), actividad);
             listaActividad.add(actividad);
+            listaEncargados.add(encargado);
             JOptionPane.showMessageDialog(null, "La actividad se ha agregado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, "La actividad ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -85,61 +47,52 @@ public class ColeccionActividades {
     public void eliminarActividad(String actividadEliminar){
         
         Actividad actividadAEliminar = mapaActividades.get(actividadEliminar);
+        Encargado encargadoAEliminar = actividadAEliminar.getEncargado();
         if(mapaActividades.get(actividadEliminar) != null){
             eliminarAlumnosActividadListaMaestra(actividadAEliminar);
             mapaActividades.remove(actividadEliminar);
             listaActividad.remove(actividadAEliminar);
+            listaEncargados.remove(encargadoAEliminar);
             JOptionPane.showMessageDialog(null, "La actividad se ha eliminado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, "La actividad no existe.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }  
+    }
 
     public void mostrarActividades(String nombreActividad) {
         // Crear una nueva ventana de diálogo
         if(!verifActividad(nombreActividad)){
             return;
         }
-        //System.out.println(mapaActividades.values());
         
         Actividad actividad = mapaActividades.get(nombreActividad);
-        actividad.mostrarDetallesActividad();
+        ActividadVista vistaActividad = new ActividadVista(actividad);
+        vistaActividad.mostrarDetallesActividad();
+        //actividad.mostrarDetallesActividad();
+    }
+
+    public int cantidadActividades(){
+        if (listaActividad == null || listaActividad.isEmpty()) {
+            return 0;
+        }
+        return listaActividad.size();
+    }
+
+    public Actividad recorrerActividades(int i){
+        if (listaActividad == null || listaActividad.isEmpty()) {
+            return null;
+        }
+        return listaActividad.get(i);
     }
 
     public void mostrarActividades(){
-
-        JFrame frame = new JFrame("Lista de Actividades");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 400);
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-
-        String[] columnNames = {"Actividad", "Encargado", "Día", "Clave Horaria"};
-        String[][] data = new String[listaActividad.size()][4];
-
-        for (int i = 0; i < listaActividad.size(); i++) {
-            Actividad actividad = listaActividad.get(i);
-            Encargado encargado = actividad.getEncargado();
-            data[i][0] = actividad.getNombreAct();
-            data[i][1] = encargado.getNombre() + " " + encargado.getApellido();
-            data[i][2] = actividad.getDia();
-            data[i][3] = actividad.getClaveHoraria();
-        }
-
-        JTable table = new JTable(data, columnNames);
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        panel.add(scrollPane, BorderLayout.CENTER);
-
-        frame.add(panel);
-
-        frame.setVisible(true);
+        ColeccionActividadesVista vista = new ColeccionActividadesVista(this);
+        vista.mostrarActividades();
     }
 
     public boolean verifActividad(String nombreActividad){
         if(mapaActividades.get(nombreActividad) == null){
-            System.out.println("La actividad no existe");
+            JOptionPane.showMessageDialog(null, "La actividad no existe.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -159,11 +112,9 @@ public class ColeccionActividades {
         for(int i = 0; i < listaMaestra.size(); i++){
             if(listaMaestra.get(i).getRut().equals(rutAlumno)){
                 listaMaestra.remove(i);
-                JOptionPane.showMessageDialog(null, "El alumno se ha eliminado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
         }
-        JOptionPane.showMessageDialog(null, "El alumno no existe.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public void eliminarAlumnoListaMaestra(String nombreAlumno, String apellidoAlumno){
@@ -177,45 +128,24 @@ public class ColeccionActividades {
         JOptionPane.showMessageDialog(null, "El alumno no existe.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    public HashMap<String, Actividad> getMapaActividades() {
-        return mapaActividades;
+    public int cantidadAlumnosTotal(){
+        if (listaMaestra == null || listaMaestra.isEmpty()) {
+            return 0;
+        }
+        return listaMaestra.size();
+    }
+
+    public Alumnos recorrerAlumnosTotal(int i){
+        if (listaMaestra == null || listaMaestra.isEmpty()) {
+            return null;
+        }
+        return listaMaestra.get(i);
     }
 
     public void mostrarAlumnosListaMaestra() {
-        // Crear una nueva ventana
-        JFrame frame = new JFrame("Lista de Elementos");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 400);
-
-        // Crear un panel para mostrar la lista de elementos
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-
-        // Crear una tabla para mostrar la lista de elementos
-        String[] columnNames = {"Nombre", "Apellido", "RUT"};
-        String[][] data = new String[listaMaestra.size()][3];
-
-        for (int i = 0; i < listaMaestra.size(); i++) {
-            Alumnos alumno = listaMaestra.get(i);
-            data[i][0] = alumno.getNombre();
-            data[i][1] = alumno.getApellido();
-            data[i][2] = alumno.getRut();
-        }
-
-        JTable table = new JTable(data, columnNames);
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        // Agregar la tabla al panel
-        panel.add(scrollPane, BorderLayout.CENTER);
-
-        // Agregar el panel a la ventana
-        frame.add(panel);
-
-        // Hacer visible la ventana
-        frame.setVisible(true);
+        ColeccionActividadesVista vista = new ColeccionActividadesVista(this);
+        vista.mostrarAlumnosListaMaestra();
     }
-
-
 
     public void cambiarEncargado(Encargado nuevoEncargado, String nombreActividad){
         if(mapaActividades.get(nombreActividad) == null){
@@ -225,15 +155,42 @@ public class ColeccionActividades {
         Actividad actividad = mapaActividades.get(nombreActividad);
         actividad.setEncargado(nuevoEncargado);
         JOptionPane.showMessageDialog(null, "Encargado cambiado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-    } 
+    }    
+    
+    public HashMap<String, Actividad> getMapaActividades() {
+        return mapaActividades;
+    }
+
+    public boolean verifClaveHoraria(String dia, String claveHoraria){
+        for(int i = 0 ; i < listaActividad.size() ; i++){
+            if(seSuperponeCon(dia,claveHoraria, listaActividad.get(i))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean seSuperponeCon(String dia, String claveHoraria, Actividad actividad) {
+        if (!actividad.getDia().equals(dia)) {
+            return false; 
+        }
+
+        if(actividad.getClaveHoraria().equals(claveHoraria)){
+            return true;
+        }
+
+        return false;
+    }
 
     public void mostrarInfoAlumno(String rut){
         if(rut == null){
             return;
         }
         for(int i = 0; i < listaMaestra.size(); i++){
-            if(listaMaestra.get(i).getRut().equals(rut)){
-                listaMaestra.get(i).mostrarInfo();
+            Alumnos alumno = listaMaestra.get(i);
+            AlumnoVista vista = new AlumnoVista(alumno);
+            if(alumno.getRut().equals(rut)){
+                vista.mostrarInfo();
                 return;
             }
         }
@@ -246,7 +203,9 @@ public class ColeccionActividades {
         }
         for(int i = 0; i < listaActividad.size(); i++){
             if(listaActividad.get(i).getEncargado().getRut().equals(rut)){
-                listaActividad.get(i).getEncargado().mostrarInfo();
+                Encargado encargado = listaActividad.get(i).getEncargado();
+                EncargadoVista vista = new EncargadoVista(encargado);
+                vista.mostrarInfo();
                 return;
             }
         }
@@ -263,9 +222,46 @@ public class ColeccionActividades {
                 return listaEncargados.get(i);
             }
         }
-
-        JOptionPane.showMessageDialog(null, "El encargado no existe.", "Error", JOptionPane.ERROR_MESSAGE);
         return null;
+    }
+    
+    public Actividad buscarActividad(String nombreAct){
+
+        Actividad actividad = mapaActividades.get(nombreAct);
+
+        if(actividad != null){
+            return actividad;
+        }
+
+        JOptionPane.showMessageDialog(null, "La actividad no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+
+    public Alumnos buscarAlumnoListaMaestra(String rut){
+        for(int i = 0 ; i < listaMaestra.size() ; i++){
+            Alumnos alumno = listaMaestra.get(i);
+            if(alumno.getRut().equals(rut)){
+                return alumno;
+            }
+        }
+        return null;
+    }
+
+    public void cambiarCarreraAlumno(String rutCambiar, String carrera){
+        Alumnos alumno = buscarAlumnoListaMaestra(rutCambiar);
+
+        if(alumno == null){
+            JOptionPane.showMessageDialog(null, "El alumno no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;     
+        }
+        
+        for(int i = 0 ; i < listaMaestra.size() ; i++){
+            if(alumno.getCarrera().equals(listaMaestra.get(i).getCarrera())){
+                alumno.setCarrera(carrera);
+                JOptionPane.showMessageDialog(null, "Carrera cambiada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }
     }
 
     public void cargarDatos() {
@@ -290,8 +286,7 @@ public class ColeccionActividades {
                 
                 Actividad actividad = new Actividad(data[0], data[2], data[3], encargado);
                 listaActividad.add(actividad);
-                mapaActividades.put(actividad.getNombreAct(), actividad);
-
+                mapaActividades.put(actividad.getNombreAct(), actividad); 
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -300,7 +295,13 @@ public class ColeccionActividades {
         try (BufferedReader readerAlumnos = new BufferedReader(new FileReader("alumnos.csv"))) {
             while ((line = readerAlumnos.readLine()) != null) {
                 String[] data = line.split(",");
-                Alumnos alumno = new Alumnos(data[0], data[1], data[2], data[3], data[4]); 
+                Alumnos alumno = new Alumnos(data[0], data[1], data[2], data[3], data[4]);
+                Actividad aux = buscarActividad(data[5]);
+                
+                if(aux != null){
+                    aux.agregarAlumno(alumno, aux);
+                }
+                
                 listaMaestra.add(alumno);
             }
         } catch (IOException e) {
@@ -334,7 +335,8 @@ public class ColeccionActividades {
                                         alumno.getApellido() + "," +
                                         alumno.getRut() + "," +
                                         alumno.getCarrera() + "," +
-                                        alumno.getAnioIngreso() + "\n");
+                                        alumno.getAnioIngreso() +  "," +
+                                        alumno.getActividad() + "\n");
                 } else {
                     System.out.println("Alumno inválido o con datos incompletos. No se guardó: " + alumno);
                 }
@@ -357,6 +359,59 @@ public class ColeccionActividades {
                     System.out.println("Encargado inválido o con datos incompletos. No se guardó: " + encargado);
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void generarReporte() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("reporte.txt"))) {
+            writer.write("=========================================\n");
+            writer.write("                REPORTE\n");
+            writer.write("=========================================\n\n");
+            writer.write("ACTIVIDADES:\n");
+    
+            int actividadCount = 1;
+            for (Actividad actividad : listaActividad) {
+                writer.write("------------\n");
+                writer.write("  - Actividad " + actividadCount + ": " + actividad.getNombreAct() + "\n");
+                writer.write("  - Encargado: " + actividad.getEncargado().getNombre() + " " + actividad.getEncargado().getApellido() + "\n");
+                writer.write("  - Clave Horaria: " + actividad.getClaveHoraria() + "\n");
+                writer.write("  - Día: " + actividad.getDia() + "\n");
+                writer.write("  - Lista de Alumnos " + "\n");
+                actividadCount++;
+            }
+            
+            writer.write("\nDETALLES DE ENCARGADOS:\n");
+            int encargadoCount = 1;
+            for (Encargado encargado : listaEncargados) {
+                writer.write("-----------------------\n");
+                writer.write("  - Encargado " + encargadoCount + ":\n");
+                writer.write("    - Nombre: " + encargado.getNombre() + "\n");
+                writer.write("    - Apellido: " + encargado.getApellido() + "\n");
+                writer.write("    - RUT: " + encargado.getRut() + "\n");
+                writer.write("    - Cargo: " + encargado.getCargo() + "\n");
+                writer.write("    - Correo: " + encargado.getCorreo() + "\n");
+                writer.write("    - Teléfono: " + encargado.getTelefono() + "\n\n");
+                encargadoCount++;
+            }
+            
+            writer.write("\nLISTA DE TODOS LOS ALUMNOS:\n");
+            writer.write("---------------------------------------\n");
+            int alumnoCount = 1;
+            for (Alumnos alumno : listaMaestra) {
+                writer.write("Alumno " + alumnoCount + ":\n");
+                writer.write("  - Nombre: " + alumno.getNombre() + "\n");
+                writer.write("  - Apellido: " + alumno.getApellido() + "\n");
+                writer.write("  - RUT: " + alumno.getRut() + "\n");
+                writer.write("  - Carrera: " + alumno.getCarrera() + "\n");
+                writer.write("  - Actividad: " + alumno.getActividad() + "\n");
+                writer.write("  - Año de Ingreso: " + alumno.getAnioIngreso() + "\n\n");
+                alumnoCount++;
+            }
+    
+            writer.write("=========================================\n");
+    
         } catch (IOException e) {
             e.printStackTrace();
         }
