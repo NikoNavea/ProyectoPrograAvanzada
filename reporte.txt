@@ -1,0 +1,149 @@
+=========================================
+                REPORTE
+=========================================
+
+ACTIVIDADES:
+------------
+  - Actividad 1: Calculo Multivariable
+  - Encargado: Jose Perez
+  - Clave Horaria: 1-2
+  - Día: Lunes
+  - Lista de Alumnos 
+------------
+  - Actividad 2: Taller de Ciencias
+  - Encargado: Roman Riquelme
+  - Clave Horaria: 5-6
+  - Día: Martes
+  - Lista de Alumnos 
+------------
+  - Actividad 3: Seminario de Historia
+  - Encargado: Bruno Gomez
+  - Clave Horaria: 3-4
+  - Día: Miercoles
+  - Lista de Alumnos 
+------------
+  - Actividad 4: Taller de Deportes
+  - Encargado: Felipe Vera
+  - Clave Horaria: 1-2
+  - Día: Jueves
+  - Lista de Alumnos 
+------------
+  - Actividad 5: Taller de Pintura
+  - Encargado: Marcelo Valladares
+  - Clave Horaria: 3-4
+  - Día: Martes
+  - Lista de Alumnos 
+------------
+  - Actividad 6: Ajedrez
+  - Encargado: Rodo Fernandez
+  - Clave Horaria: 1-2
+  - Día: Viernes
+  - Lista de Alumnos 
+
+DETALLES DE ENCARGADOS:
+-----------------------
+  - Encargado 1:
+    - Nombre: Jose
+    - Apellido: Perez
+    - RUT: 12945678-9
+    - Cargo: Director
+    - Correo: jose@pucv.cl
+    - Teléfono: 12345678
+
+-----------------------
+  - Encargado 2:
+    - Nombre: Roman
+    - Apellido: Riquelme
+    - RUT: 12265832-1
+    - Cargo: Coordinador
+    - Correo: roman@pucv.cl
+    - Teléfono: 87654321
+
+-----------------------
+  - Encargado 3:
+    - Nombre: Bruno
+    - Apellido: Gomez
+    - RUT: 8799823-4
+    - Cargo: Supervisor
+    - Correo: bruno@pucv.cl
+    - Teléfono: 56789123
+
+-----------------------
+  - Encargado 4:
+    - Nombre: Felipe
+    - Apellido: Vera
+    - RUT: 9431458-4
+    - Cargo: Supervisor
+    - Correo: felipe@pucv.cl
+    - Teléfono: 42972364
+
+-----------------------
+  - Encargado 5:
+    - Nombre: Marcelo
+    - Apellido: Valladares
+    - RUT: 9561483-4
+    - Cargo: Supervisor
+    - Correo: marcelo@pucv.cl
+    - Teléfono: 64213847
+
+-----------------------
+  - Encargado 6:
+    - Nombre: Rodo
+    - Apellido: Fernandez
+    - RUT: 12345678-K
+    - Cargo: Coordinador
+    - Correo: rodo@pucv.cl
+    - Teléfono: 56966434224
+
+
+LISTA DE TODOS LOS ALUMNOS:
+---------------------------------------
+Alumno 1:
+  - Nombre: Pedro
+  - Apellido: Pascal
+  - RUT: 1255578-8
+  - Carrera: Ingenieria
+  - Actividad: Calculo Multivariable
+  - Año de Ingreso: 2023
+
+Alumno 2:
+  - Nombre: Angela
+  - Apellido: Fernandez
+  - RUT: 7659321-3
+  - Carrera: Arquitectura
+  - Actividad: Ajedrez
+  - Año de Ingreso: 2022
+
+Alumno 3:
+  - Nombre: Alvaro
+  - Apellido: Martinez
+  - RUT: 56989523-6
+  - Carrera: Medicina
+  - Actividad: Taller de Ciencias
+  - Año de Ingreso: 2024
+
+Alumno 4:
+  - Nombre: Fernando
+  - Apellido: Perez
+  - RUT: 10385678-9
+  - Carrera: Ingenieria
+  - Actividad: Seminario de Historia
+  - Año de Ingreso: 2020
+
+Alumno 5:
+  - Nombre: Franco
+  - Apellido: Verdessi
+  - RUT: 12341578-0
+  - Carrera: Geografia
+  - Actividad: Ajedrez
+  - Año de Ingreso: 2022
+
+Alumno 6:
+  - Nombre: Maria
+  - Apellido: Sepulveda
+  - RUT: 12448628-1
+  - Carrera: Ingenieria
+  - Actividad: Taller de Pintura
+  - Año de Ingreso: 2012
+
+=========================================
