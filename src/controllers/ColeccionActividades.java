@@ -10,21 +10,32 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+/**
+ * Clase que crea la colección de actividades del sistema
+ * @see Actividad
+ * @see Encargado
+ * @see Alumnos
+ */
 public class ColeccionActividades {
     private HashMap <String, Actividad> mapaActividades;
     private ArrayList <Actividad> listaActividad;
     private ArrayList <Alumnos> listaMaestra;
     private ArrayList <Encargado> listaEncargados;
     
-
+    /**
+     * Constructor de la clase ColeccionActividades
+     */
     public ColeccionActividades(){
         mapaActividades = new HashMap<>();
         listaActividad = new ArrayList<>();
         listaMaestra = new ArrayList<>();
         listaEncargados = new ArrayList<>();
     }
-
+    /**
+     * Agrega una actividad a la colección de actividades
+     * @param actividad Actividad a agregar
+     * @param encargado Encargado de la actividad
+     */
     public void agregarActividad(Actividad actividad, Encargado encargado){
         if(mapaActividades.get(actividad.getNombreAct()) == null){
             mapaActividades.put(actividad.getNombreAct(), actividad);
@@ -35,7 +46,10 @@ public class ColeccionActividades {
             JOptionPane.showMessageDialog(null, "La actividad ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    /**
+     * Elimina un Alumno de la lista maestra de alumnos
+     * @param actividad Actividad de la cual se eliminará el alumno
+     */
     public void eliminarAlumnosActividadListaMaestra(Actividad actividad){
         for(int i = 0 ; i < listaMaestra.size() ; i++){
             if(actividad.eliminarAlumnoListaMaestraAct(listaMaestra.get(i).getRut())){
@@ -43,7 +57,10 @@ public class ColeccionActividades {
             }
         }
     }
-
+    /**
+     * Elimina una actividad de la colección de actividades
+     * @param actividadEliminar Nombre de la actividad a eliminar
+     */
     public void eliminarActividad(String actividadEliminar){
         
         Actividad actividadAEliminar = mapaActividades.get(actividadEliminar);
@@ -58,7 +75,10 @@ public class ColeccionActividades {
             JOptionPane.showMessageDialog(null, "La actividad no existe.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    /**
+     * Mostar los detalles de una actividad
+     * @param nombreActividad Nombre de la actividad a mostrar
+     */
     public void mostrarActividades(String nombreActividad) {
         // Crear una nueva ventana de diálogo
         if(!verifActividad(nombreActividad)){
@@ -68,28 +88,40 @@ public class ColeccionActividades {
         Actividad actividad = mapaActividades.get(nombreActividad);
         ActividadVista vistaActividad = new ActividadVista(actividad);
         vistaActividad.mostrarDetallesActividad();
-        //actividad.mostrarDetallesActividad();
     }
-
+    /**
+     * Retorna la cantidad de actividades guardadas
+     * @return Cantidad de actividades guardadas
+     */
     public int cantidadActividades(){
         if (listaActividad == null || listaActividad.isEmpty()) {
             return 0;
         }
         return listaActividad.size();
     }
-
+    /**
+     * Retorna la actividad en la posición i de la lista de actividades
+     * @param i Posición de la lista de actividades
+     * @return Actividad en la posición i de la lista de actividades
+     */
     public Actividad recorrerActividades(int i){
         if (listaActividad == null || listaActividad.isEmpty()) {
             return null;
         }
         return listaActividad.get(i);
     }
-
+    /**
+     * Muestra las actividades guardadas
+     */
     public void mostrarActividades(){
         ColeccionActividadesVista vista = new ColeccionActividadesVista(this);
         vista.mostrarActividades();
     }
-
+    /**
+     * Verifica si una actividad existe
+     * @param nombreActividad Nombre de la actividad a verificar
+     * @return True si la actividad existe, False si no existe
+     */
     public boolean verifActividad(String nombreActividad){
         if(mapaActividades.get(nombreActividad) == null){
             JOptionPane.showMessageDialog(null, "La actividad no existe.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -97,7 +129,10 @@ public class ColeccionActividades {
         }
         return true;
     }
-
+    /**
+     * Agrega un alumno a la lista maestra de alumnos
+     * @param alumno Alumno a agregar a la lista maestra
+     */
     public void agregarAlumnoListaMaestra(Alumnos alumno){
         for(int i = 0; i < listaMaestra.size(); i++){
             if(listaMaestra.get(i).getRut().equals(alumno.getRut())){
@@ -107,7 +142,10 @@ public class ColeccionActividades {
         }
         listaMaestra.add(alumno);
     }
-
+    /**
+     * Elimina un alumno de la lista maestra de alumnos
+     * @param rutAlumno Rut del alumno a eliminar
+     */
     public void eliminarAlumnoListaMaestra(String rutAlumno){
         for(int i = 0; i < listaMaestra.size(); i++){
             if(listaMaestra.get(i).getRut().equals(rutAlumno)){
@@ -116,7 +154,11 @@ public class ColeccionActividades {
             }
         }
     }
-
+    /**
+     * Elimina un alumno de la lista maestra de alumnos
+     * @param nombreAlumno Nombre del alumno a eliminar
+     * @param apellidoAlumno Apellido del alumno a eliminar
+     */
     public void eliminarAlumnoListaMaestra(String nombreAlumno, String apellidoAlumno){
         for(int i = 0; i < listaMaestra.size(); i++){
             if(listaMaestra.get(i).getNombre().equals(nombreAlumno) && listaMaestra.get(i).getApellido().equals(apellidoAlumno)){
@@ -127,26 +169,39 @@ public class ColeccionActividades {
         }
         JOptionPane.showMessageDialog(null, "El alumno no existe.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-
+    /**
+     * Retorna la cantidad de alumnos de una actividad
+     * @return Cantidad de alumnos de una actividad
+     */
     public int cantidadAlumnosTotal(){
         if (listaMaestra == null || listaMaestra.isEmpty()) {
             return 0;
         }
         return listaMaestra.size();
     }
-
+    /**
+     * Retorna el alumno en la posición i de la lista maestra de alumnos
+     * @param i Posición de la lista maestra de alumnos
+     * @return Alumno en la posición i de la lista maestra de alumnos
+     */
     public Alumnos recorrerAlumnosTotal(int i){
         if (listaMaestra == null || listaMaestra.isEmpty()) {
             return null;
         }
         return listaMaestra.get(i);
     }
-
+    /**
+     * Muestra a todos los alumnos del sistema
+     */
     public void mostrarAlumnosListaMaestra() {
         ColeccionActividadesVista vista = new ColeccionActividadesVista(this);
         vista.mostrarAlumnosListaMaestra();
     }
-
+    /**
+     * Cambia el encargado de una actividad
+     * @param nuevoEncargado Nuevo encargado de la actividad
+     * @param nombreActividad Nombre de la actividad a cambiar el encargado
+     */
     public void cambiarEncargado(Encargado nuevoEncargado, String nombreActividad){
         if(mapaActividades.get(nombreActividad) == null){
             JOptionPane.showMessageDialog(null, "La actividad no existe.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -156,11 +211,19 @@ public class ColeccionActividades {
         actividad.setEncargado(nuevoEncargado);
         JOptionPane.showMessageDialog(null, "Encargado cambiado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }    
-    
+    /**
+     * 
+     * @return
+     */
     public HashMap<String, Actividad> getMapaActividades() {
         return mapaActividades;
     }
-
+    /**
+     * Verifica si una clave horaria se superpone con otra
+     * @param dia Día de la actividad
+     * @param claveHoraria Clave horaria de la actividad
+     * @return True si se superpone, False si no se superpone
+     */
     public boolean verifClaveHoraria(String dia, String claveHoraria){
         for(int i = 0 ; i < listaActividad.size() ; i++){
             if(seSuperponeCon(dia,claveHoraria, listaActividad.get(i))){
@@ -169,7 +232,13 @@ public class ColeccionActividades {
         }
         return false;
     }
-
+    /**
+     * Verifica si una clave horaria se superpone con otra
+     * @param dia Día de la actividad
+     * @param claveHoraria Clave horaria de la actividad
+     * @param actividad Actividad a verificar
+     * @return True si se superpone, False si no se superpone
+     */
     public boolean seSuperponeCon(String dia, String claveHoraria, Actividad actividad) {
         if (!actividad.getDia().equals(dia)) {
             return false; 
@@ -181,7 +250,10 @@ public class ColeccionActividades {
 
         return false;
     }
-
+    /**
+     * Muestra la información de un alumno
+     * @param rut Rut del alumno a mostrar
+     */
     public void mostrarInfoAlumno(String rut){
         if(rut == null){
             return;
@@ -196,7 +268,10 @@ public class ColeccionActividades {
         }
         JOptionPane.showMessageDialog(null, "El alumno no existe.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-
+    /**
+     * Muestra la información de un encargado
+     * @param rut Rut del encargado a mostrar
+     */
     public void mostrarInfoEncargado(String rut){
         if(rut == null){
             return;
@@ -211,7 +286,11 @@ public class ColeccionActividades {
         }
         JOptionPane.showMessageDialog(null, "El encargado no existe.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-
+    /**
+     * Busca un encargado por su rut
+     * @param rut Rut del encargado a buscar
+     * @return Encargado buscado
+     */
     public Encargado buscarEncargadoPorRut(String rut){
         if(rut == null){
             return null;
@@ -224,7 +303,11 @@ public class ColeccionActividades {
         }
         return null;
     }
-    
+    /**
+     * Busca una actividad por su nombre
+     * @param nombreAct Nombre de la actividad a buscar
+     * @return Actividad buscada o null si no existe
+     */
     public Actividad buscarActividad(String nombreAct){
 
         Actividad actividad = mapaActividades.get(nombreAct);
@@ -236,7 +319,11 @@ public class ColeccionActividades {
         JOptionPane.showMessageDialog(null, "La actividad no existe.", "Error", JOptionPane.ERROR_MESSAGE);
         return null;
     }
-
+    /**
+     * Busca un alumno por su rut en la lista maestra de alumnos
+     * @param rut Rut del alumno a buscar
+     * @return Alumno buscado o null si no existe
+     */
     public Alumnos buscarAlumnoListaMaestra(String rut){
         for(int i = 0 ; i < listaMaestra.size() ; i++){
             Alumnos alumno = listaMaestra.get(i);
@@ -246,7 +333,11 @@ public class ColeccionActividades {
         }
         return null;
     }
-
+    /**
+     * Cambia la carrera de un alumno
+     * @param rutCambiar Rut del alumno
+     * @param carrera Carrera en cual se cambiará el alumno
+     */
     public void cambiarCarreraAlumno(String rutCambiar, String carrera){
         Alumnos alumno = buscarAlumnoListaMaestra(rutCambiar);
 
@@ -263,7 +354,9 @@ public class ColeccionActividades {
             }
         }
     }
-
+    /**
+     * Carga los datos de los archivos csv
+     */
     public void cargarDatos() {
         String line;
         
@@ -286,7 +379,9 @@ public class ColeccionActividades {
                 
                 Actividad actividad = new Actividad(data[0], data[2], data[3], encargado);
                 listaActividad.add(actividad);
-                mapaActividades.put(actividad.getNombreAct(), actividad); 
+                mapaActividades.put(actividad.getNombreAct(), actividad);
+
+                
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -309,7 +404,9 @@ public class ColeccionActividades {
         }
     }
 
-
+    /**
+     * Guarda los datos en los archivos csv
+     */
     public void guardarDatos() {
         // Guardar actividades
         try (BufferedWriter writerActividades = new BufferedWriter(new FileWriter("actividades.csv"))) {
@@ -363,7 +460,9 @@ public class ColeccionActividades {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Genera un reporte txt de todas las actividades, encargados y alumnos del sistema
+     */
     public void generarReporte() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("reporte.txt"))) {
             writer.write("=========================================\n");

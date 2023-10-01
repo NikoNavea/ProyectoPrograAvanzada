@@ -6,13 +6,17 @@ import controllers.ColeccionActividades;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+/**
+ * Clase que crea el menú principal del sistema
+ */
 public class Menu {
     private JFrame frame;
     private JPanel panelPrincipal;
     private ColeccionActividades coleccion;
 
-    
+    /**
+     * Constructor de la clase Menu
+     */
     public Menu() {
         frame = new JFrame("Sistema de Planificación");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,10 +25,11 @@ public class Menu {
         coleccion = new ColeccionActividades();
         mostrarMenuPrincipal();
     }
-
+    /**
+     * Método que muestra el menú principal del sistema
+     */
     public void mostrarMenuPrincipal() {
         coleccion.cargarDatos();
-        //coleccion.inicializarActs();
         panelPrincipal = new JPanel(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -109,7 +114,9 @@ public class Menu {
         frame.setVisible(true);
     }
 
-    
+    /**
+     * Método que muestra el menú de gestión de actividades
+     */
     private void mostrarMenuActividades() {
         JPanel panelActividades = new JPanel(new GridBagLayout());
 
@@ -395,7 +402,9 @@ public class Menu {
         frame.revalidate();
         frame.repaint();
     }
-
+    /**
+     * Método que muestra el menú de gestión de alumnos
+     */
     private void mostrarMenuAlumnos() {
         JPanel panelActividades = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -659,7 +668,9 @@ public class Menu {
         frame.revalidate();
         frame.repaint();
     }
-
+    /**
+     * Método que muestra la información de las claves horarias
+     */
     public void mostrarClavesHorarias(){
         // Nombres de las columnas para la tabla
         String[] columnNames = {"Clave Horaria", "Inicio", "Fin"};
@@ -687,14 +698,22 @@ public class Menu {
         // Mostrar la tabla en un cuadro de diálogo
         JOptionPane.showMessageDialog(null, scrollPane, "Información de Claves Horarias", JOptionPane.INFORMATION_MESSAGE);
     }
-
+    /**
+     * Método que valida el rut ingresado
+     * @param rut Rut ingresado
+     * @throws RutInvalidoException Excepción que se lanza si el rut es inválido
+     */
     public void validarRut(String rut) throws RutInvalidoException {
 
         if (!rut.matches("^\\d{7,8}-[\\dkK]$")) {
             throw new RutInvalidoException("El formato del RUT es inválido.");
         }
     }
-
+    /**
+     * Método que verifica el email ingresado
+     * @param email Email ingresado
+     * @throws EmailInvalidoException Excepción que se lanza si el email es inválido
+     */
     public void verificarEmail(String email) throws EmailInvalidoException {
         if (!email.endsWith("@pucv.cl")) {
             throw new EmailInvalidoException("El email debe terminar con '@pucv.cl'");

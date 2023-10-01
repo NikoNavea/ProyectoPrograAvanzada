@@ -1,10 +1,21 @@
 package models;
-
+/**
+ * Clase que crea los encargados del sistema
+ * @see Persona
+ */
 public class Encargado extends Persona{
     private String cargo;
     private String telefono;
     private String correo;
-    
+    /**
+     * Constructor de la clase Encargado
+     * @param nombre Nombre del encargado
+     * @param apellido Apellido del encargado
+     * @param rut Rut del encargado
+     * @param cargo Cargo del encargado
+     * @param telefono Teléfono del encargado
+     * @param correo Correo del encargado
+     */
     public Encargado(String nombre, String apellido, String rut, String cargo, String telefono, String correo) {
         super(nombre, apellido, rut);
         this.cargo = cargo;

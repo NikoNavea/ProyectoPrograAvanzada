@@ -1,10 +1,20 @@
 package models;
-
+/**
+ * Clase que crea los alumnos del sistema
+ * @see Persona
+ */
 public class Alumnos extends Persona{
     private String carrera;
     private String anioIngreso;
     private String actividad; 
-    
+    /**
+     * Constructor de la clase Alumnos
+     * @param nombre Nombre del alumno
+     * @param apellido Apellido del alumno
+     * @param rut Rut del alumno
+     * @param carrera Carrera del alumno
+     * @param anioIngreso Año de ingreso del alumno
+     */
     public Alumnos(String nombre, String apellido, String rut, String carrera, String anioIngreso){
         super(nombre, apellido, rut);
         this.carrera = carrera;

@@ -9,17 +9,25 @@ import java.awt.event.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
-
+/**
+ * Clase que crea la interfaz gráfica para mostrar información sobre una actividad
+ * @see Actividad
+ */
 public class ActividadVista {
     protected Actividad actividad;
     DefaultTableModel tablaAlumnos = new DefaultTableModel();
     private boolean seFiltro;
-
+    /**
+     * Constructor de la clase ActividadVista
+     * @param actividad Actividad de la cual se mostrará la información
+     */
     public ActividadVista(Actividad actividad){
         this.actividad = actividad;
         this.seFiltro = false;
     }
-
+    /**
+     * Muestra los detalles de la actividad
+     */
     public void mostrarDetallesActividad() {
         JFrame frame = new JFrame("Detalles de la Actividad");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -83,7 +91,10 @@ public class ActividadVista {
         frame.add(panelPrincipal);
         frame.setVisible(true);
     }
-
+    /**
+     * Muestra los alumnos filtrados por carrera
+     * @param carrera Carrera por la que se filtrará
+     */
     public void mostrarAlumnosFiltrados(String carrera) {
        while (tablaAlumnos.getRowCount() > 0) {
             tablaAlumnos.removeRow(0);
@@ -96,7 +107,9 @@ public class ActividadVista {
         }
         seFiltro = true;
     }
-
+    /**
+     * Restablece la lista de alumnos en caso de que se haya filtrado
+     */
     public void restablecerListaAlumnos() {
         if(!seFiltro) {
             return;

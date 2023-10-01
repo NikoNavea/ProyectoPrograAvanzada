@@ -6,13 +6,21 @@ import models.Encargado;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * Clase que crea las interfaces gráficas para mostrar información sobre las actividades y alumnos del sistema
+ */
 public class ColeccionActividadesVista{
     protected ColeccionActividades coleccionActividades;
+    /**
+     * Constructor de la clase ColeccionActividadesVista
+     * @param coleccionActividades Colección de actividades del sistema
+     */
     public ColeccionActividadesVista(ColeccionActividades coleccionActividades){
         this.coleccionActividades = coleccionActividades;
     }
-
+    /**
+     * Muestra detalles sobre todas las actividades del sistema
+     */
     public void mostrarActividades(){
 
         JFrame frame = new JFrame("Lista de Actividades");
@@ -43,7 +51,9 @@ public class ColeccionActividadesVista{
 
         frame.setVisible(true);
     }
-
+    /**
+     * Muestra todos los alumnos del sistema junto con su información
+     */
     public void mostrarAlumnosListaMaestra() {
         JFrame frame = new JFrame("Lista de Alumnos");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -3,9 +3,16 @@ import models.Alumnos;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * Clase que crea la interfaz gráfica para mostrar información sobre un alumno
+ * @see Alumnos
+ */
 public class AlumnoVista extends PersonaVista{
     protected Alumnos alumno;
+    /**
+     * Constructor de la clase AlumnoVista
+     * @param alumno Alumno del cual se mostrará la información
+     */
     public AlumnoVista(Alumnos alumno){
         super(alumno);
         this.alumno = alumno;

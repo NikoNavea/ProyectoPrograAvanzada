@@ -3,10 +3,16 @@ import models.Encargado;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * Clase que crea la interfaz gráfica para mostrar información sobre un encargado
+ * @see Encargado
+ */
 public class EncargadoVista extends PersonaVista {
     protected Encargado encargado;
-    
+    /**
+     * Constructor de la clase EncargadoVista
+     * @param encargado Encargado del cual se mostrará la información
+     */
     public EncargadoVista(Encargado encargado){
         super(encargado);
         this.encargado = encargado;
