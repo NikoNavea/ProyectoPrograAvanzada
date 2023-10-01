@@ -1,4 +1,4 @@
-package exceptions;
+package planificacion.exceptions;
 /**
  * Excepción que se lanza cuando el rut ingresado no es válido
  */

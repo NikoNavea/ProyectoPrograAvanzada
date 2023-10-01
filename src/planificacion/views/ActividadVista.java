@@ -1,12 +1,13 @@
-package views;
-import models.Actividad;
-import models.Alumnos;
-import models.Encargado;
-
+package planificacion.views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.table.DefaultTableModel;
+
+import planificacion.models.Actividad;
+import planificacion.models.Alumnos;
+import planificacion.models.Encargado;
+
 import java.util.List;
 
 /**
