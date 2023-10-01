@@ -1,8 +1,8 @@
-package controllers;
-import views.Menu;
-
+package planificacion;
 import java.io.*;
 import javax.swing.*;
+
+import planificacion.views.Menu;
 //Planificación de las actividades del área de Extensión de una Universidad
 /**
  * Clase que ejecuta el programa

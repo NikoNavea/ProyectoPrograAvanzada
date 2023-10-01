@@ -1,7 +1,7 @@
-package views;
-import models.*;
-import exceptions.*;
-import controllers.ColeccionActividades;
+package planificacion.views;
+import planificacion.controllers.ColeccionActividades;
+import planificacion.exceptions.*;
+import planificacion.models.*;
 
 import javax.swing.*;
 import java.awt.*;

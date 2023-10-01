@@ -1,7 +1,8 @@
-package views;
-import models.Persona;
-
+package planificacion.views;
 import javax.swing.*;
+
+import planificacion.models.Persona;
+
 import java.awt.*;
 /**
  * Clase que crea la interfaz gráfica para mostrar información sobre una persona

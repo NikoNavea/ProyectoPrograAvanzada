@@ -1,8 +1,8 @@
-package views;
-import controllers.ColeccionActividades;
-import models.Actividad;
-import models.Alumnos;
-import models.Encargado;
+package planificacion.views;
+import planificacion.controllers.ColeccionActividades;
+import planificacion.models.Actividad;
+import planificacion.models.Alumnos;
+import planificacion.models.Encargado;
 
 import javax.swing.*;
 import java.awt.*;

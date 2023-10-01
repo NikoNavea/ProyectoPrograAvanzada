@@ -1,7 +1,8 @@
-package views;
-import models.Alumnos;
-
+package planificacion.views;
 import javax.swing.*;
+
+import planificacion.models.Alumnos;
+
 import java.awt.*;
 /**
  * Clase que crea la interfaz gráfica para mostrar información sobre un alumno

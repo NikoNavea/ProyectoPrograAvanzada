@@ -1,7 +1,6 @@
-package controllers;
-import models.*;
-import views.*;
-
+package planificacion.controllers;
+import planificacion.models.*;
+import planificacion.views.*;
 
 import java.util.*;
 import javax.swing.*;

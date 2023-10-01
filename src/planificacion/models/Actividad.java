@@ -1,4 +1,4 @@
-package models;
+package planificacion.models;
 
 import java.util.*;
 import javax.swing.*;

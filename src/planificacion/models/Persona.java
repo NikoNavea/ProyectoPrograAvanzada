@@ -1,4 +1,4 @@
-package models;
+package planificacion.models;
 /**
  * Clase que crea las personas del sistema
  */
